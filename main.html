@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>NURO MD V1 PAIR SITE </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===== Base Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== Body ===== */
+body {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== Background Animated Circles ===== */
+.background-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.c1 {
+  width: 300px;
+  height: 300px;
+  background: #ff00cc;
+  top: -50px;
+  left: -50px;
+  animation: float 6s infinite ease-in-out;
+}
+
+.c2 {
+  width: 400px;
+  height: 400px;
+  background: #333399;
+  bottom: -100px;
+  right: -100px;
+  animation: float 8s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+/* ===== Container ===== */
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Main Box ===== */
+.box {
+  width: 320px;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+}
+
+/* ===== Animated Border ===== */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.box::before,
+.box::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 65%,
+    #00f2ff
+  );
+  border-radius: 14px;
+  z-index: -1;
+  animation: spin 3s linear infinite;
+}
+
+.box::before {
+  filter: blur(1rem);
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  from { --angle: 0deg; }
+  to { --angle: 360deg; }
+}
+
+/* ===== Icon ===== */
+.icon-box {
+  font-size: 50px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+/* ===== Headings ===== */
+h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h6 {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+h6 span {
+  color: #00c6ff;
+}
+
+/* ===== Input Container ===== */
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 3;
+}
+
+/* ===== Input ===== */
+.input-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 15px;
+}
+
+.input-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== Submit Button (FIXED) ===== */
+.input-container button {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  z-index: 4;          /* ⭐ FIX */
+  opacity: 1;
+  display: block;
+  transition: 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+}
+
+.input-container button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+}
+
+/* ===== Result Area ===== */
+#pair {
+  margin-top: 18px;
+  min-height: 40px;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* ===== Code Display ===== */
+.code-display {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+/* ===== Loading ===== */
+.loading {
+  color: #00c6ff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+  </style>
+</head>
+<body>
+
+  <div class="background-circle c1"></div>
+  <div class="background-circle c2"></div>
+
+  <div class="container">
+    <div class="box">
+      <div class="icon-box">
+        <i class="fas fa-robot"></i>
+      </div>
+      <h3>NURO MD V1</h3>
+      <h6>Powerd By <span>Tharaka Dilshan</span></h6>
+      
+      <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">Enter WhatsApp number with Country Code</p>
+
+      <div class="input-container">
+        <input placeholder="Ex: 9477xxxxxxx" type="number" id="number">
+        <button id="submit">Get Code</button>
+      </div>
+
+      <main id="pair"></main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+
+    // Code එක Click කළාම Copy වෙන්න
+    async function Copy() {
+      let textElement = document.getElementById("copy");
+      let codeText = textElement.innerText;
+      
+      await navigator.clipboard.writeText(codeText);
+      
+      textElement.innerText = "COPIED! ✅";
+      textElement.style.color = "#00ff00";
+      
+      setTimeout(() => {
+        textElement.innerText = codeText;
+        textElement.style.color = "#00ff00";
+      }, 1000);
+    }
+
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+      
+      if (!c.value) {
+        a.innerHTML = '<span style="color:#ff4d4d; font-size: 14px;">⚠️ Please enter your number!</span>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 10) {
+        a.innerHTML = '<span style="color:#ff4d4d; font-size: 14px;">⚠️ Invalid Number Format!</span>';
+      } else {
+        const number = c.value.replace(/[^0-9]/g, "");
+        
+        // Loading Animation
+        a.innerHTML = '<span class="loading"><i class="fas fa-spinner fa-spin"></i> Getting Code...</span>';
+        
+        try {
+          let { data } = await axios(`/code?number=${number}`);
+          let code = data.code || "Service Unavailable";
+          
+          // Result Display
+          a.innerHTML = `
+            <div onclick="Copy()" class="code-display" title="Click to Copy">
+              <span id="copy">${code}</span>
+            </div>
+            <p style="font-size:10px; color:#aaa; margin-top:5px;">Click the code to copy</p>
+          `;
+        } catch (error) {
+          a.innerHTML = '<span style="color:#ff4d4d;">❌ Error! Please try again.</span>';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
