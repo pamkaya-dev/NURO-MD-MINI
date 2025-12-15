@@ -53,8 +53,8 @@ const config = {
 
 // ---------------- MONGO SETUP ----------------
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://chamamdv1_db_user:YupH0ZpXsxTV435e@cluster0.fpzbl0b.mongodb.net//';
-const MONGO_DB = process.env.MONGO_DB || 'CHAMA_GGUMINI_TEDT';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://nuro1234:nuro1221@nuro.llgukda.mongodb.net/';
+const MONGO_DB = process.env.MONGO_DB || 'nuro';
 
 let mongoClient, mongoDB;
 let sessionsCol, numbersCol, adminsCol, newsletterCol, configsCol, newsletterReactsCol;
