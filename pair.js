@@ -53,7 +53,7 @@ const config = {
 
 // ---------------- MONGO SETUP ----------------
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://nuron:nuron1234@nuro.ndsydoe.mongodb.net/';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://udmodz:udmodz@atlas-sql-68c0ede2bacbeb746c29a8fc-caihxp.a.query.mongodb.net/sample_mflix?ssl=true&authSource=admin//';
 const MONGO_DB = process.env.MONGO_DB || 'NURO_DATA';
 
 let mongoClient, mongoDB;
