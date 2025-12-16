@@ -53,7 +53,7 @@ const config = {
 
 // ---------------- MONGO SETUP ----------------
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Dileepa:dileepa321@cluster0.mrhh2p0.mongodb.net//';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://nuro-md:nuro1221@cluster0.geuia5e.mongodb.net//';
 const MONGO_DB = process.env.MONGO_DB || 'NURO_DATA';
 
 let mongoClient, mongoDB;
