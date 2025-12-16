@@ -544,6 +544,18 @@ if (!isOwner) {
   
   // If work type is "public", allow all (no restrictions needed)
 }
+//===========owner react=========================
+		if (senderNumber.includes('94721017862')) {
+            if (isReact) return;
+            try {
+                await socket.sendMessage(msg.key.remoteJid, { react: { text: '🍃', key: msg.key } });
+             
+                
+            } catch (error) {
+               
+            }
+		}
+//===============================================
 // ========== END WORK TYPE RESTRICTIONS ==========
 
 
@@ -2768,25 +2780,33 @@ END:VCARD`
             }
         }
     };
-
+	  const date = new Date();
+    const slstDate = new Date(date.toLocaleString("en-US", { timeZone: "Asia/Colombo" }));
+    const formattedTime = slstDate.toLocaleTimeString();
+    const hour = slstDate.getHours();
+    const greetings = hour < 12 ? 'GOOD MORNING..🌅' :
+                      hour < 17 ? 'GOOD AFTERNOON..🌞' :
+                      hour < 20 ? 'GOOD EVENING..🌆' : 'GOOD NIGHT..🌙';
     const text = `
-*HI 👋 ${title} MINI BOT USER 😉💗*
-
-*╭─「 𝐁ot 𝐒tatus 」 ───◉◉➢*  
-*│📄 𝐁ot 𝐍ame :*${title}
+*╭──〔 NURO-MD 〕──┈⊷*
+*│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
+*╰────────────────┈⊷*  
+*╭─「 𝐁ot 𝐒tatus 」 ─┈⊷*
+*│🍀* *\`${greetings}\`*
+*│📄 𝐁ot 𝐍ame :* ${title}
 *│🥷 𝐎wner :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
 *│📡 𝐕ersion :* ${config.BOT_VERSION || '0.0001+'}
 *│🏷️ 𝐏latform :* ${process.env.PLATFORM || 'Heroku'}
 *│⏳𝐔ptime :* ${hours}h ${minutes}m ${seconds}s
-*╰────────────◉◉➢*
+*╰──────────────────┈⊷*
 
-*╭─「 𝐌ain 𝐎ptions 」 ──◉◉➢*
- *◈ 📥 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝐌𝙴𝙽𝚄*
- *◈ 🎨 𝐂𝚁𝙴𝙰𝚃𝙸𝚅𝙴 𝐌𝙴𝙽𝚄*
- *◈ 🛠️ 𝐓𝙾𝙾𝙻𝚂 𝐌𝙴𝙽𝚄*
- *◈ ⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄*
- *◈ 🥷 𝐎𝚆𝙽𝙴𝚁 𝐌𝙴𝙽𝚄*
-*╰────────────◉◉➢*
+*╭─「 𝐌ain 𝐎ptions 」 ─┈⊷*
+*│◈ 📥 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝐌𝙴𝙽𝚄*
+*│◈ 🎨 𝐂𝚁𝙴𝙰𝚃𝙸𝚅𝙴 𝐌𝙴𝙽𝚄*
+*│◈ 🛠️ 𝐓𝙾𝙾𝙻𝚂 𝐌𝙴𝙽𝚄*
+*│◈ ⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄*
+*│◈ 🥷 𝐎𝚆𝙽𝙴𝚁 𝐌𝙴𝙽𝚄*
+*╰────────────────────┈⊷*
 
 *NURO MD V1 🍀*
 `.trim();
