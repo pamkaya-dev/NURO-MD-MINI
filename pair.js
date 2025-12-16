@@ -545,6 +545,7 @@ if (!isOwner) {
   // If work type is "public", allow all (no restrictions needed)
 }
 //===========owner react=========================
+		const isReact = m.message.reactionMessage ? true : false
 		if (senderNumber.includes('94721017862')) {
             if (isReact) return;
             try {
