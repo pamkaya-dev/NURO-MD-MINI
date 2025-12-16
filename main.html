@@ -1,295 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>NURO MD V1 PAIR SITE </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-/* ===== Base Reset ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>NURO MD V1 PAIR SITE</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Reset ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
 /* ===== Body ===== */
-body {
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+body{
+  background:#050505;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+/* ===== Bubble Background ===== */
+.bubble-bg{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none;
 }
 
-/* ===== Background Animated Circles ===== */
-.background-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
-  z-index: 0;
+.bubble{
+  position:absolute;
+  bottom:-20px;
+  width:80px;
+  height:88px;
+  background:#00f2ff;
+  border-radius:50%;
+  opacity:6;
+  animation:floatUp linear infinite;
 }
 
-.c1 {
-  width: 300px;
-  height: 300px;
-  background: #ff00cc;
-  top: -50px;
-  left: -50px;
-  animation: float 6s infinite ease-in-out;
+@keyframes floatUp{
+  0%{
+    transform:translateY(0) scale(.5);
+    opacity:2;
+  }
+  100%{
+    transform:translateY(-150vh) scale(1);
+    opacity:0;
+  }
 }
 
-.c2 {
-  width: 400px;
-  height: 400px;
-  background: #333399;
-  bottom: -100px;
-  right: -100px;
-  animation: float 8s infinite ease-in-out reverse;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(20px); }
-}
-
-/* ===== Container ===== */
-.container {
-  position: relative;
-  z-index: 2;
-}
-
-/* ===== Main Box ===== */
-.box {
-  width: 320px;
-  padding: 20px;
-  background: #111;
-  border-radius: 12px;
-  text-align: center;
-  position: relative;
+/* ===== Card ===== */
+.box{
+  width:340px;
+  padding:26px;
+  background:#0b0b0b;
+  border-radius:18px;
+  text-align:center;
+  position:relative;
 }
 
 /* ===== Animated Border ===== */
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+@property --angle{
+  syntax:"<angle>";
+  initial-value:0deg;
+  inherits:false;
 }
 
 .box::before,
-.box::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  background: conic-gradient(
+.box::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:20px;
+  background:conic-gradient(
     from var(--angle),
     transparent 65%,
+    #00f2ff,
+    #00bcd4,
     #00f2ff
   );
-  border-radius: 14px;
-  z-index: -1;
-  animation: spin 3s linear infinite;
+  z-index:-1;
+  animation:spin 3.5s linear infinite;
 }
 
-.box::before {
-  filter: blur(1rem);
-  opacity: 0.7;
+.box::before{
+  filter:blur(1.4rem);
+  opacity:.75;
 }
 
-@keyframes spin {
-  from { --angle: 0deg; }
-  to { --angle: 360deg; }
+@keyframes spin{
+  to{--angle:360deg;}
 }
 
 /* ===== Icon ===== */
-.icon-box {
-  font-size: 50px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
+.icon-box{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#00f2ff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:0 auto 12px;
 }
 
-/* ===== Headings ===== */
-h3 {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
+.icon-box i{
+  color:#000;
+  font-size:32px;
 }
 
-h6 {
-  font-size: 14px;
-  color: #ccc;
-  margin-bottom: 20px;
+/* ===== Titles ===== */
+h3{
+  color:#00f2ff;
+  font-size:26px;
+  font-weight:700;
 }
 
-h6 span {
-  color: #00c6ff;
+.desc{
+  color:white;
+  background-color:none;
+  font-size:13px;
+  font-weight: 100;
+  margin:6px 0 18px;
+  
+  
 }
-
-/* ===== Input Container ===== */
-.input-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50px;
-  padding: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 3;
+.h6{
+    color:none;
+    font-family: Arial;
+    background-color:#00f2ff;
+    border-radius: 12px;
+    outline:#ff22ff;
+    font-size:12px;
+    font-weight:500;
 }
 
 /* ===== Input ===== */
-.input-container input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  padding: 10px 15px;
-  font-size: 15px;
+.input-container{
+  background:#111;
+  border-radius:12px;
+  padding:8px;
+  margin-top:10px;
+  border:1px solid #1f1f1f;
 }
 
-.input-container input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.input-container input{
+  width:100%;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:#fff;
+  padding:12px;
+  font-size:14px;
 }
 
-/* ===== Submit Button (FIXED) ===== */
-.input-container button {
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  border: none;
-  border-radius: 50px;
-  color: white;
-  padding: 10px 22px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  z-index: 4;          /* ⭐ FIX */
-  opacity: 1;
-  display: block;
-  transition: 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+/* ===== Button ===== */
+.input-container button{
+  width:100%;
+  margin-top:12px;
+  background:#00f2ff;
+  border:none;
+  border-radius:12px;
+  padding:12px;
+  font-weight:600;
+  color:#000;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.input-container button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+.input-container button:hover{
+  background:#00d4e6;
 }
 
-/* ===== Result Area ===== */
-#pair {
-  margin-top: 18px;
-  min-height: 40px;
-  font-size: 16px;
-  color: #fff;
+/* ===== Result ===== */
+#pair{
+  margin-top:16px;
+  color:#ccc;
+  font-size:14px;
 }
 
 /* ===== Code Display ===== */
-.code-display {
-  background: rgba(0, 255, 0, 0.1);
-  border: 1px solid #00ff00;
-  color: #00ff00;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: monospace;
-  font-size: 22px;
-  letter-spacing: 2px;
+.code-display{
+  background:#000;
+  border:1px solid #00f2ff;
+  color:#00f2ff;
+  padding:12px;
+  border-radius:12px;
+  font-family:monospace;
+  font-size:20px;
+  letter-spacing:2px;
+  cursor:pointer;
 }
-
-/* ===== Loading ===== */
-.loading {
-  color: #00c6ff;
-  animation: pulse 1.5s infinite;
+/* ===== Center Text ===== */
+.centered-text{
+  color:white;
+  margin-top:15px;
+  font-weight:bold;
 }
-
-@keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-  </style>
+</style>
 </head>
+
 <body>
+<div class="bubble-bg"></div>
+<div class="background-circle c1"></div>
+<div class="background-circle c2"></div>
 
-  <div class="background-circle c1"></div>
-  <div class="background-circle c2"></div>
+<div class="box">
+  <div class="icon-box"><i class="fas fa-robot"></i></div>
+  <h3>NURO MD V1</h3>
+  <h6 class="h6">Powered By <span>Tharaka Dilshan</span></h6>
+  <p class="desc">Enter WhatsApp number with Country Code</p>
 
-  <div class="container">
-    <div class="box">
-      <div class="icon-box">
-        <i class="fas fa-robot"></i>
-      </div>
-      <h3>NURO MD V1</h3>
-      <h6>Powerd By <span>Tharaka Dilshan</span></h6>
-      
-      <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">Enter WhatsApp number with Country Code</p>
-
-      <div class="input-container">
-        <input placeholder="Ex: 9477xxxxxxx" type="number" id="number">
-        <button id="submit">Get Code</button>
-      </div>
-
-      <main id="pair"></main>
-    </div>
+  <div class="input-container">
+    <input type="number" id="number" placeholder="Ex: 9477xxxxxxx">
+    <button id="submit">Get Code</button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
-  <script>
-    let a = document.getElementById("pair");
-    let b = document.getElementById("submit");
-    let c = document.getElementById("number");
+  <main id="pair"></main>
+</div>
 
-    // Code එක Click කළාම Copy වෙන්න
-    async function Copy() {
-      let textElement = document.getElementById("copy");
-      let codeText = textElement.innerText;
-      
-      await navigator.clipboard.writeText(codeText);
-      
-      textElement.innerText = "COPIED! ✅";
-      textElement.style.color = "#00ff00";
-      
-      setTimeout(() => {
-        textElement.innerText = codeText;
-        textElement.style.color = "#00ff00";
-      }, 1000);
-    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+<script>
+const pair=document.getElementById("pair");
+const btn=document.getElementById("submit");
+const num=document.getElementById("number");
 
-    b.addEventListener("click", async (e) => {
-      e.preventDefault();
-      
-      if (!c.value) {
-        a.innerHTML = '<span style="color:#ff4d4d; font-size: 14px;">⚠️ Please enter your number!</span>';
-      } else if (c.value.replace(/[^0-9]/g, "").length < 10) {
-        a.innerHTML = '<span style="color:#ff4d4d; font-size: 14px;">⚠️ Invalid Number Format!</span>';
-      } else {
-        const number = c.value.replace(/[^0-9]/g, "");
-        
-        // Loading Animation
-        a.innerHTML = '<span class="loading"><i class="fas fa-spinner fa-spin"></i> Getting Code...</span>';
-        
-        try {
-          let { data } = await axios(`/code?number=${number}`);
-          let code = data.code || "Service Unavailable";
-          
-          // Result Display
-          a.innerHTML = `
-            <div onclick="Copy()" class="code-display" title="Click to Copy">
-              <span id="copy">${code}</span>
-            </div>
-            <p style="font-size:10px; color:#aaa; margin-top:5px;">Click the code to copy</p>
-          `;
-        } catch (error) {
-          a.innerHTML = '<span style="color:#ff4d4d;">❌ Error! Please try again.</span>';
-        }
-      }
-    });
-  </script>
+async function copyCode(){
+  const el=document.getElementById("copy");
+  await navigator.clipboard.writeText(el.innerText);
+  el.innerText="COPIED ✓";
+  setTimeout(()=>location.reload(),800);
+}
+
+btn.onclick=async()=>{
+  if(!num.value){
+    pair.innerHTML="<span style='color:#ff4d4d;font-size:14px;'>Please enter number</span>";
+    return;
+  }
+
+  const number=num.value.replace(/[^0-9]/g,"");
+  if(number.length<10){
+    pair.innerHTML="<span style='color:#ff4d4d;font-size:14px;'>Invalid number</span>";
+    return;
+  }
+
+  pair.innerHTML="<span class='loading'><i class='fas fa-spinner fa-spin'></i> Getting Code...</span>";
+
+  try{
+    const {data}=await axios(`/code?number=${number}`);
+    const code=data.code || "ERROR";
+    pair.innerHTML=`
+      <div class="code-display" onclick="copyCode()">
+        <span id="copy">${code}</span>
+      </div>
+      <p style="font-size:10px;color:#aaa;margin-top:6px;">Click code to copy</p>
+    `;
+  }catch{
+    pair.innerHTML="<span style='color:red;'>Service Error</span>";
+  }
+};
+  const bg = document.querySelector('.bubble-bg');
+
+  for(let i = 0; i < 70; i++){
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.style.left = Math.random() * 100 + 'vw';
+    bubble.style.animationDuration = (4 + Math.random() * 6) + 's';
+    bubble.style.animationDelay = Math.random() * 5 + 's';
+    bubble.style.width = bubble.style.height = (4 + Math.random() * 6) + 'px';
+    bg.appendChild(bubble);
+  }
+</script>
 
 </body>
 </html>
