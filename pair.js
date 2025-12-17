@@ -2820,14 +2820,17 @@ END:VCARD`
     }, { quoted: shonux });*/
 	  
 	  let vpsOptions = [
-        { title: "📥 DOWNLOAD MENU", description: "© © 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛", id: `${config.PREFIX}downmenu` },
-        { title: "👑 OWNER", description: "© © 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛", id: `${config.PREFIX}owner` }
+        { title: "📥 DOWNLOAD MENU", description: "© ɢᴇᴛ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ", id: `${config.PREFIX}download` },
+		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", id: `${config.PREFIX}creative` },
+		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", id: `${config.PREFIX}tools` },
+		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", id: `${config.PREFIX}settings` },
+        { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", id: `${config.PREFIX}owner` }
     ];
 
     let buttonSections = [
         {
             title: "ɴᴜʀᴏ ᴍɪɴɪ ʙᴏᴛ ᴍᴇɴᴜ ᴄᴏᴍᴍᴀɴᴅꜱ",
-            highlight_label: "ɴᴜʀᴏ ᴍᴅ ᴠ1",
+            highlight_label: "ɴᴜʀᴏ ᴍᴅ ᴠ1 🤍",
             rows: vpsOptions
         }
     ];
@@ -2846,33 +2849,18 @@ END:VCARD`
             }
         },
         {
-            buttonId: `${config.PREFIX}download}`,
-            buttonText: { displayText: '© ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ' },
+            buttonId: `${config.PREFIX}ping}`,
+            buttonText: { displayText: '⚡ PING' },
             type: 1
         },
         {
             buttonId: `${config.PREFIX}creative`,
-            buttonText: { displayText: '© ᴛᴏᴏʟ ᴄᴍᴅ' },
+            buttonText: { displayText: '👑 OWNER' },
             type: 1
-        },
-		{
-            buttonId: `${config.PREFIX}tools`,
-            buttonText: { displayText: '© ᴏᴛʜᴇʀᴇ ᴄᴍᴅ' },
-            type: 1
-	},
-	  {
-            buttonId: `${config.PREFIX}settings`,
-            buttonText: { displayText: '© ꜱᴇᴛᴛɪɴɢꜱ ᴄᴍᴅ' },
-            type: 1
-	  },
-	  {
-            buttonId: `${config.PREFIX}owner`,
-            buttonText: { displayText: '© ᴏᴡɴᴇʀ ᴄᴍᴅ' },
-            type: 1
-	  }
+        }
 		
     ];
-    const defaultImg = 'https://files.catbox.moe/p2f8x0.jpg';
+    const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
     const useLogo = userCfg.logo || defaultImg;
 
     // build image payload (url or buffer)
@@ -2886,8 +2874,8 @@ END:VCARD`
         buttons,
         headerType: 1,
         viewOnce: true,
-        caption: 'ɴᴜʀᴏ ᴍᴅ',
-        image:imagePayload ,
+        caption: text,
+        image:MenuImg,
         contextInfo: {
             mentionedJid: [sender], 
             forwardingScore: 999,
