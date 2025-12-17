@@ -2867,7 +2867,7 @@ END:VCARD`
     let imagePayload;
     if (String(useLogo).startsWith('http')) imagePayload = { url: useLogo };
     else {
-      try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: defaultImg }; }
+      try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: MenuImg }; }
     }
 
     await socket.sendMessage(sender, {
@@ -2890,7 +2890,7 @@ END:VCARD`
 
   } catch (err) {
     console.error('menu command error:', err);
-    try { await socket.sendMessage(sender, { text: '❌ Failed to show menu.' }, { quoted: msg }); } catch(e){}
+    try { await socket.sendMessage(sender, { text: '❌ Failed to show menu.'+err }, { quoted: msg }); } catch(e){}
   }
   break;
 }
