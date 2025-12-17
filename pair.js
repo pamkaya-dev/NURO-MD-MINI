@@ -2854,17 +2854,17 @@ END:VCARD`
             buttonId: `${config.PREFIX}creative`,
             buttonText: { displayText: '© ᴛᴏᴏʟ ᴄᴍᴅ' },
             type: 1
-        }
+        },
 		{
             buttonId: `${config.PREFIX}tools`,
             buttonText: { displayText: '© ᴏᴛʜᴇʀᴇ ᴄᴍᴅ' },
             type: 1
-	}
+	},
 	  {
             buttonId: `${config.PREFIX}settings`,
             buttonText: { displayText: '© ꜱᴇᴛᴛɪɴɢꜱ ᴄᴍᴅ' },
             type: 1
-	  }
+	  },
 	  {
             buttonId: `${config.PREFIX}owner`,
             buttonText: { displayText: '© ᴏᴡɴᴇʀ ᴄᴍᴅ' },
