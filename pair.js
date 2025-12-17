@@ -2861,7 +2861,7 @@ END:VCARD`
 		
     ];
     const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
-    const useLogo = userCfg.logo || defaultImg;
+    const useLogo = userCfg.logo || MenuImg;
 
     // build image payload (url or buffer)
     let imagePayload;
