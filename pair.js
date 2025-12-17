@@ -2864,18 +2864,18 @@ END:VCARD`
     const useLogo = userCfg.logo || MenuImg;
 
     // build image payload (url or buffer)
-    let imagePayload;
+  /*  let imagePayload;
     if (String(useLogo).startsWith('http')) imagePayload = { url: useLogo };
     else {
       try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: MenuImg }; }
-    }
+    }*/
 
     await socket.sendMessage(sender, {
         buttons,
         headerType: 1,
         viewOnce: true,
         caption: text,
-        image:MenuImg,
+        image:{ url:MenuImg },
         contextInfo: {
             mentionedJid: [sender], 
             forwardingScore: 999,
