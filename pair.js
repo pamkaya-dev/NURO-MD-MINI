@@ -2374,23 +2374,23 @@ case 'alive': {
     const seconds = Math.floor(uptime % 60);
 
     const text = `
-*𝐇𝙸 👋 ${botName}  𝐁𝙾𝚃 𝐔𝚂𝙴𝚁 𝐈 𝐀𝙼 𝐀𝙻𝙸𝚅𝙴 𝐍𝙾𝚆 😼💗*
+*𝐇𝙸 👋 ${botName}  𝐁𝙾𝚃 𝐔𝚂𝙴𝚁 𝐈 𝐀𝙼 𝐀𝙻𝙸𝚅𝙴 𝐍𝙾𝚆 💞🍃*
 
-*╭─「 𝐒ᴛᴀᴛᴜꜱ 𝐃ᴇᴛᴀɪʟꜱ 」 ──●●➤*  
-*│*👤 *𝐔ser :*
-*│*🥷 *𝐎wner :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
-*│*✒️ *𝐏refix :* .
-*│*🧬 *𝐕ersion :* 2.0.0
-*│*🎈 *𝐏latform :* ${process.env.PLATFORM || 'Heroku'}
-*│*📟 *𝐔ptime :* ${hours}h ${minutes}m ${seconds}s
-*╰─────────────●●➤*
+*╭─「 ɴᴜʀᴏ ʙᴏᴛ ᴅᴇᴛᴀɪꜱ 」─┈⊷*  
+*│👤 ᴜꜱᴇʀ :*
+*│🥷 ᴏᴡɴᴇʀ :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
+*│✒️ ᴘʀᴇꜰɪx :* .
+*│🧬 ᴠᴇʀꜱɪᴏɴ :* 2.0.0
+*│🏳️ ᴘʟᴀᴛꜰᴏʀᴍ :* ${process.env.PLATFORM || 'Heroku'}
+*│📟 ᴜᴘᴛɪᴍᴇ :* ${hours}h ${minutes}m ${seconds}s
+*╰───────────────┈⊷*
 
 > *${botName}*
 `;
 
     const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝐌𝙰𝙸𝙽 𝙼𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: "📡 𝐁𝙾𝚃 𝐒𝙿𝙴𝙴𝙳" }, type: 1 }
+      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" }, type: 1 },
+      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 OWNER" }, type: 1 }
     ];
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2780,34 +2780,25 @@ END:VCARD`
 *│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
 *╰────────────────┈⊷*  
 *╭─「 𝐁ot 𝐒tatus 」 ─┈⊷*
-*│🍀* *\`${greetings}\`*
-*│📄 𝐁ot 𝐍ame :* ${title}
-*│🥷 𝐎wner :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
-*│📡 𝐕ersion :* ${config.BOT_VERSION || '0.0001+'}
-*│🏷️ 𝐏latform :* ${process.env.PLATFORM || 'Heroku'}
-*│⏳𝐔ptime :* ${hours}h ${minutes}m ${seconds}s
+*│🍀* *ɢʀᴇᴇᴛɪɴɢ: *\`${greetings}\`*
+*│📄* *ʙᴏᴛ ɴᴀᴍᴇ:* *ɴᴜʀᴏ ᴍᴅ*
+*│👑* *ᴏᴡɴᴇʀ :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
+*│📡* *ᴠᴇʀꜱɪᴏɴ :* ${config.BOT_VERSION || '0.0001+'}
+*│🏷️* *ᴘʟᴀᴛꜰᴏʀᴍ :* ${process.env.PLATFORM || 'Heroku'}
+*│⏳* *ᴜᴘᴛɪᴍᴇ* :* ${hours}h ${minutes}m ${seconds}s
 *╰──────────────────┈⊷*
-
-*╭─「 𝐌ain 𝐎ptions 」 ─┈⊷*
-*│◈ 📥 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝐌𝙴𝙽𝚄*
-*│◈ 🎨 𝐂𝚁𝙴𝙰𝚃𝙸𝚅𝙴 𝐌𝙴𝙽𝚄*
-*│◈ 🛠️ 𝐓𝙾𝙾𝙻𝚂 𝐌𝙴𝙽𝚄*
-*│◈ ⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄*
-*│◈ 🥷 𝐎𝚆𝙽𝙴𝚁 𝐌𝙴𝙽𝚄*
-*╰────────────────────┈⊷*
-
-*NURO MD V1 🍀*
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
 
     const buttons = [
-      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}creative`, buttonText: { displayText: "🎨 𝐂𝚁𝙴𝙰𝚃𝙸𝚅𝙴 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}tools`, buttonText: { displayText: "🛠️ 𝐓𝙾𝙾𝙻𝚂 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "🥷 𝐎𝚆𝙽𝙴𝚁 𝐌𝙴𝙽𝚄" }, type: 1 }
+      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄" }, type: 1 },
+      { buttonId: `${config.PREFIX}creative`, buttonText: { displayText: "🛠️ 𝚃𝙾𝙾𝙻 𝙼𝙴𝙽𝚄" }, type: 1 },
+      { buttonId: `${config.PREFIX}tools`, buttonText: { displayText: "🚀 𝙾𝚃𝙷𝙴𝚁𝙴 𝙼𝙴𝙽𝚄" }, type: 1 },
+      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝙼𝙴𝙽𝚄" }, type: 1 },
+      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 𝙾𝚆𝙽𝙴𝚁 𝙼𝙴𝙽𝚄" }, type: 1 }
     ];
 
-    const defaultImg = 'https://files.catbox.moe/paap2h.jpg';
+    const defaultImg = 'https://files.catbox.moe/p2f8x0.jpg';
     const useLogo = userCfg.logo || defaultImg;
 
     // build image payload (url or buffer)
@@ -2820,7 +2811,7 @@ END:VCARD`
     await socket.sendMessage(sender, {
       image: imagePayload,
       caption: text,
-      footer: "NURO MD",
+      footer: "© 𝚂𝚄𝙿𝙿𝙾𝚁𝚃𝙴𝙳 𝙱𝚈 𝙳𝚃𝚉 ♚",
       buttons,
       headerType: 4
     }, { quoted: shonux });
@@ -2863,30 +2854,28 @@ END:VCARD`
     };
 
     const text = `
-*╭─「𝐃ownload 𝐌enu」 ──◉◉➢*   
-
-*╭──────────◉◉➢*
-✘ 🎵 *𝐌usic 𝐃ownloaders*
-✘ ${config.PREFIX}song [query]
-✘ ${config.PREFIX}csong [jid] [query]
-✘ ${config.PREFIX}ringtone [name]
-
-✘ 🎬 *𝐕ideo 𝐃ownloaders*
-✘ ${config.PREFIX}tiktok [url]
-✘ ${config.PREFIX}video [query]
-✘ ${config.PREFIX}xvideo [query]
-✘ ${config.PREFIX}xnxx [query]
-✘ ${config.PREFIX}fb [url]
-✘ ${config.PREFIX}ig [url]
-
-✘ 📱 *𝐀pp & 𝐅iles*
-✘ ${config.PREFIX}apk [app id]
-✘ ${config.PREFIX}apksearch [app name]
-✘ ${config.PREFIX}mediafire [url]
-✘ ${config.PREFIX}gdrive [url]
-*╰──────────◉◉➢*
-
-> *NURO MD V1 🍀*
+*╭────────────────●►*   
+*│📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔*
+*╰────────────────●►*
+*╭─「 𝐌𝐔𝐒𝐈𝐂 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷*
+*│* 🎵 *𝐌usic 𝐃ownloaders*
+*│* ${config.PREFIX}song [query]
+*│* ${config.PREFIX}csong [jid] [query]
+*│* ${config.PREFIX}ringtone [name]
+*╭─「 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷
+*│* ${config.PREFIX}tiktok [url]
+*│* ${config.PREFIX}video [query]
+*│* ${config.PREFIX}xvideo [query]
+*│* ${config.PREFIX}xnxx [query]
+*│* ${config.PREFIX}fb [url]
+*│* ${config.PREFIX}ig [url]
+*╭─「 𝐀𝐏𝐊 & 𝐅𝐈𝐋𝐄 𝐂𝐌𝐃 」──┈⊷*
+*│* ${config.PREFIX}apk [app id]
+*│* ${config.PREFIX}apksearch [app name]
+*│* ${config.PREFIX}mediafire [url]
+*│* ${config.PREFIX}gdrive [url]
+*╰────────────────┈⊷*
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
 
     const buttons = [
@@ -2896,7 +2885,7 @@ END:VCARD`
 
     await socket.sendMessage(sender, {
       text,
-      footer: "📥 𝐃ᴏᴡɴʟᴏᴀᴅ 𝐂ᴏᴍᴍᴀɴᴅꜱ",
+      footer: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄",
       buttons
     }, { quoted: shonux });
 
@@ -2938,35 +2927,33 @@ END:VCARD`
     };
 
     const text = `
-*╭─「𝐂reative 𝐌enu」 ──◉◉➢*  
-
-*╭──────────◉◉➢*
-✘ 🤖 *𝐀I 𝐅eatures*
-✘ ${config.PREFIX}ai [message]
-✘ ${config.PREFIX}aiimg [prompt]
-✘ ${config.PREFIX}aiimg2 [prompt]
-
-✘ ✍️ *𝐓ext 𝐓ools*
-✘ ${config.PREFIX}font [text]
- 
-✘ 🖼️ *𝐈mage 𝐓ools*
-✘ ${config.PREFIX}getdp [number]
- 
-✘ 💾 *𝐌edia 𝐒aver*
-✘ ${config.PREFIX}save (reply to status) 
-*╰──────────◉◉➢*
-
-> *NURO MD V1 🍀*
+*╭─────────────●►*  
+*│🛠️ 𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔
+*╰─────────────●►*
+*╭─「𝐀𝐈 𝐓𝐎𝐎𝐋」────┈⊷*
+*│* ${config.PREFIX}ai [message]
+*│* ${config.PREFIX}aiimg [prompt]
+*│* ${config.PREFIX}aiimg2 [prompt]
+*╭─「𝐅𝐀𝐍𝐒𝐘 𝐓𝐎𝐎𝐋」─┈⊷
+*│* ${config.PREFIX}font [text]
+*╰────────────────┈⊷*
+*╭─「𝐃𝐏 𝐓𝐎𝐎𝐋」────┈⊷
+*│*${config.PREFIX}getdp [number]
+*╰───────────────┈⊷
+*╭─「𝐌𝐄𝐃𝐄𝐀 𝐓𝐎𝐎𝐋」─┈⊷
+*│*${config.PREFIX}save (reply to status) 
+*╰──────────────┈⊷*
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
 
     const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝐌𝙴𝙽𝚄" }, type: 1 }
+      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 𝐌𝐀𝐈𝐍 𝐌𝐄𝐍𝐔" }, type: 1 },
+      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔" }, type: 1 }
     ];
 
     await socket.sendMessage(sender, {
       text,
-      footer: "🎨 𝐂ʀᴇᴀᴛɪᴠᴇ 𝐂ᴏᴍᴍᴀɴᴅꜱ",
+      footer: "🛠️ 𝐓𝐎𝐎𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃",
       buttons
     }, { quoted: shonux });
 
@@ -3008,47 +2995,45 @@ END:VCARD`
     };
 
     const text = `
-*╭─「𝐓ools 𝐌enu」 ──◉◉➢*  
+*╭─────────────────●►*
+*│🛠️ OTHE MENU*
+*╰─────────────────●►*
 
-*╭──────────◉◉➢*
-✘ 🆔 *𝐈nfo 𝐓ools*
-✘ ${config.PREFIX}jid
-✘ ${config.PREFIX}cid [channel-link]
-✘ ${config.PREFIX}system
-
-✘ 👥 *𝐆roup 𝐓ools*
-✘ ${config.PREFIX}tagall [message]
-✘ ${config.PREFIX}online
-
-✘ 📰 *𝐍ews 𝐓ools*
-✘ ${config.PREFIX}adanews
-✘ ${config.PREFIX}sirasanews
-✘ ${config.PREFIX}lankadeepanews
-✘ ${config.PREFIX}gagananews
-
-✘ *𝐔ser 𝐌anagement*
-✘ ${config.PREFIX}block [number]
-✘ ${config.PREFIX}unblock [number]
-✘ ${config.PREFIX}prefix
-✘ ${config.PREFIX}autorecording
-✘ ${config.PREFIX}mread
-✘ ${config.PREFIX}creject
-✘ ${config.PREFIX}wtyp
-✘ ${config.PREFIX}arm
-✘ ${config.PREFIX}rstatus
-✘ ${config.PREFIX}botpresence
-
-
-✘ 👥 *𝐆oogle 𝐒earch 𝐓ools*
-✘ ${config.PREFIX}img [query]
-✘ ${config.PREFIX}google [query]
- 
-✘ 📊 *𝐁ot 𝐒tatus*
-✘ ${config.PREFIX}ping
-✘ ${config.PREFIX}alive
-*╰──────────◉◉➢*
-
-> *NURO MD V1 🍀*
+*╭─「𝐈𝐍𝐅𝐎 𝐂𝐌𝐃」─┈⊷*
+*│* ${config.PREFIX}jid
+*│* ${config.PREFIX}cid [channel-link]
+*│* ${config.PREFIX}system
+*╰───────────────────┈⊷
+*╭─「 𝐆𝐑𝐎𝐔𝐏 𝐂𝐌𝐃 」─┈⊷*
+*│* ${config.PREFIX}tagall [message]
+*│* ${config.PREFIX}online
+*╰───────────────────┈⊷
+*╭─「𝐍𝐄𝐖𝐒 𝐂𝐌𝐃」────┈⊷*
+*│* ${config.PREFIX}adanews
+*│* ${config.PREFIX}sirasanews
+*│* ${config.PREFIX}lankadeepanews
+*│* ${config.PREFIX}gagananews
+*╰───────────────────┈⊷
+*╭─「𝐔𝐒𝐄𝐑 𝐂𝐌𝐃」────┈⊷*
+*│* ${config.PREFIX}block [number]
+*│* ${config.PREFIX}unblock [number]
+*│* ${config.PREFIX}prefix
+*│* ${config.PREFIX}autorecording
+*│* ${config.PREFIX}mread
+*│* ${config.PREFIX}creject
+*│* ${config.PREFIX}wtyp
+*│* ${config.PREFIX}arm
+*│* ${config.PREFIX}rstatus
+*│* ${config.PREFIX}botpresence
+*╰───────────────────┈⊷
+*╭─「𝐒𝐄𝐀𝐑𝐂𝐇 𝐂𝐌𝐃」────┈⊷*
+*│* ${config.PREFIX}img [query]
+*│* ${config.PREFIX}google [query]
+*╰───────────────────┈⊷
+*╭─「𝐂𝐇𝐄𝐂𝐊 𝐂𝐌𝐃」─┈⊷*
+*│* ${config.PREFIX}ping
+*│* ${config.PREFIX}alive
+*╰──────────────┈⊷
 `.trim();
 
     const buttons = [
