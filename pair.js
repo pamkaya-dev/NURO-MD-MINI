@@ -2772,25 +2772,28 @@ END:VCARD`
     const slstDate = new Date(date.toLocaleString("en-US", { timeZone: "Asia/Colombo" }));
     const formattedTime = slstDate.toLocaleTimeString();
     const hour = slstDate.getHours();
-    const greetings = hour < 12 ? 'GOOD MORNING..🌅' :
-                      hour < 17 ? 'GOOD AFTERNOON..🌞' :
-                      hour < 20 ? 'GOOD EVENING..🌆' : 'GOOD NIGHT..🌙';
+    const greetings = hour < 12 ? 'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ..🌅' :
+                      hour < 17 ? 'ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ..🌞' :
+                      hour < 20 ? 'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ..🌆' : 'ɢᴏᴏᴅ ɴɪɢʜᴛ..🌙';
     const text = `
 *╭──〔 NURO-MD 〕──┈⊷*
 *│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
 *╰────────────────┈⊷*  
 *╭─「 𝐁ot 𝐒tatus 」 ─┈⊷*
-*│🍀* *ɢʀᴇᴇᴛɪɴɢ: *\`${greetings}\`*
-*│📄* *ʙᴏᴛ ɴᴀᴍᴇ:* *ɴᴜʀᴏ ᴍᴅ*
-*│👑* *ᴏᴡɴᴇʀ :* ${config.OWNER_NAME || 'Tharaka Dilshan'}
-*│📡* *ᴠᴇʀꜱɪᴏɴ :* ${config.BOT_VERSION || '0.0001+'}
-*│🏷️* *ᴘʟᴀᴛꜰᴏʀᴍ :* ${process.env.PLATFORM || 'Heroku'}
-*│⏳* *ᴜᴘᴛɪᴍᴇ* :* ${hours}h ${minutes}m ${seconds}s
+*│🍀* *\`ɢʀᴇᴇᴛɪɴɢ:\`* *\`${greetings}\`*
+*│📄* *\`ʙᴏᴛ ɴᴀᴍᴇ:\`* *ɴᴜʀᴏ ᴍᴅ*
+*│👑* *\`ᴏᴡɴᴇʀ :\`* ᴛʜᴀʀᴀᴋᴀ ᴅɪʟꜱʜᴀɴ*
+*│📆* *\`ᴅᴀᴛᴇ:\`* *${slstDate}*
+*│🕜* *\`ᴛɪᴍᴇ:\`* *${formattedTime}*
 *╰──────────────────┈⊷*
+\`⚠️ ᴛʜɪꜱ ɪꜱ ᴍᴇɴᴜ ᴏꜰ ɴᴜʀᴏ ᴍᴅ ᴍɪɴɪ ʙᴏᴛ.
+ꜱᴏ ʏᴏᴜ ᴄɴ ꜰɪɴᴅ ᴅᴇᴛᴀɪꜱ ᴏꜰ ᴏᴜʀ ʙᴏᴛ
+ᴜꜱᴇ ᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ꜱʜᴇᴀʀᴇ ᴡʜɪᴛʜ ʏᴏᴜʀ ꜰʀɪᴇɴᴅꜱ\`
+
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
 
-    const buttons = [
+    /*const buttons = [
       { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄" }, type: 1 },
       { buttonId: `${config.PREFIX}creative`, buttonText: { displayText: "🛠️ 𝚃𝙾𝙾𝙻 𝙼𝙴𝙽𝚄" }, type: 1 },
       { buttonId: `${config.PREFIX}tools`, buttonText: { displayText: "🚀 𝙾𝚃𝙷𝙴𝚁𝙴 𝙼𝙴𝙽𝚄" }, type: 1 },
@@ -2814,6 +2817,87 @@ END:VCARD`
       footer: "© 𝚂𝚄𝙿𝙿𝙾𝚁𝚃𝙴𝙳 𝙱𝚈 𝙳𝚃𝚉 ♚",
       buttons,
       headerType: 4
+    }, { quoted: shonux });*/
+	  
+	  let vpsOptions = [
+        { title: "📥 DOWNLOAD MENU", description: "© © 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛", id: `${config.PREFIX}downmenu` },
+        { title: "👑 OWNER", description: "© © 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛", id: `${config.PREFIX}owner` }
+    ];
+
+    let buttonSections = [
+        {
+            title: "ɴᴜʀᴏ ᴍɪɴɪ ʙᴏᴛ ᴍᴇɴᴜ ᴄᴏᴍᴍᴀɴᴅꜱ",
+            highlight_label: "ɴᴜʀᴏ ᴍᴅ ᴠ1",
+            rows: vpsOptions
+        }
+    ];
+
+    let buttons = [
+        {
+            buttonId: "action",
+            buttonText: { displayText: "Sᴇʟᴇᴄᴛ Mᴇɴᴜ" },
+            type: 4,
+            nativeFlowInfo: {
+                name: "single_select",
+                paramsJson: JSON.stringify({
+                    title: "CHOOSE MENU TAB",
+                    sections: buttonSections
+                })
+            }
+        },
+        {
+            buttonId: `${config.PREFIX}download}`,
+            buttonText: { displayText: '© ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ' },
+            type: 1
+        },
+        {
+            buttonId: `${config.PREFIX}creative`,
+            buttonText: { displayText: '© ᴛᴏᴏʟ ᴄᴍᴅ' },
+            type: 1
+        }
+		{
+            buttonId: `${config.PREFIX}tools`,
+            buttonText: { displayText: '© ᴏᴛʜᴇʀᴇ ᴄᴍᴅ' },
+            type: 1
+	}
+	  {
+            buttonId: `${config.PREFIX}settings`,
+            buttonText: { displayText: '© ꜱᴇᴛᴛɪɴɢꜱ ᴄᴍᴅ' },
+            type: 1
+	  }
+	  {
+            buttonId: `${config.PREFIX}owner`,
+            buttonText: { displayText: '© ᴏᴡɴᴇʀ ᴄᴍᴅ' },
+            type: 1
+	  }
+		
+    ];
+    const defaultImg = 'https://files.catbox.moe/p2f8x0.jpg';
+    const useLogo = userCfg.logo || defaultImg;
+
+    // build image payload (url or buffer)
+    let imagePayload;
+    if (String(useLogo).startsWith('http')) imagePayload = { url: useLogo };
+    else {
+      try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: defaultImg }; }
+    }
+
+    await socket.sendMessage(sender, {
+        buttons,
+        headerType: 1,
+        viewOnce: true,
+        caption: ɴᴜʀᴏ ᴍᴅ,
+        image:imagePayload ,
+        contextInfo: {
+            mentionedJid: [sender], 
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363403935705046@newsletter',
+                newsletterName: 'ɴᴜʀᴏ ᴍᴅ ᴠ1',
+                serverMessageId: 143
+            }
+        }
     }, { quoted: shonux });
 
   } catch (err) {
