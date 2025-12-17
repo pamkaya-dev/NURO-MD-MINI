@@ -2886,7 +2886,7 @@ END:VCARD`
         buttons,
         headerType: 1,
         viewOnce: true,
-        caption: ɴᴜʀᴏ ᴍᴅ,
+        caption: 'ɴᴜʀᴏ ᴍᴅ',
         image:imagePayload ,
         contextInfo: {
             mentionedJid: [sender], 
