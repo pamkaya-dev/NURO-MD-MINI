@@ -1,3 +1,5 @@
+//29
+
 const express = require('express');
 const fs = require('fs-extra');
 const path = require('path');
@@ -24,6 +26,21 @@ const {
   downloadContentFromMessage,
   DisconnectReason
 } = require('baileys');
+//==========add==
+
+let activeSockets1 = 0
+
+function socketConnected() {
+  activeSockets1++
+}
+
+function socketDisconnected() {
+  if (activeSockets1 > 0) activeSockets1--
+}
+
+function getActiveSockets() {
+  return activeSockets1
+}
 
 // ---------------- CONFIG ----------------
 
