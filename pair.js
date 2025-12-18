@@ -1632,7 +1632,7 @@ END:VCARD`
 
     if (!number) {
         return await socket.sendMessage(sender, {
-            text: '*🍁 Usage:* .pair +9470604XXXX'
+            text: '*🍁 Usage:* .pair +9472𝚇𝚇𝚇𝚇𝚇𝚇𝚇'
         }, { quoted: msg });
     }
 
@@ -2776,19 +2776,19 @@ END:VCARD`
                       hour < 17 ? 'ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ..🌞' :
                       hour < 20 ? 'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ..🌆' : 'ɢᴏᴏᴅ ɴɪɢʜᴛ..🌙';
     const text = `
-*╭──〔 NURO-MD 〕──┈⊷*
+*╭──〔 NURO-MD 〕─┈⊷*
 *│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
-*╰────────────────┈⊷*  
+*╰──────────────┈⊷*  
 *╭─「 𝐁ot 𝐒tatus 」 ─┈⊷*
 *│🍀* *\`ɢʀᴇᴇᴛɪɴɢ:\`* *\`${greetings}\`*
 *│📄* *\`ʙᴏᴛ ɴᴀᴍᴇ:\`* *ɴᴜʀᴏ ᴍᴅ*
-*│👑* *\`ᴏᴡɴᴇʀ :\`* ᴛʜᴀʀᴀᴋᴀ ᴅɪʟꜱʜᴀɴ*
+*│👑* *\`ᴏᴡɴᴇʀ :\`* ᴛʜᴀʀᴀᴋᴀ*
 *│📆* *\`ᴅᴀᴛᴇ:\`* *${slstDate}*
 *│🕜* *\`ᴛɪᴍᴇ:\`* *${formattedTime}*
-*╰──────────────────┈⊷*
-\`⚠️ ᴛʜɪꜱ ɪꜱ ᴍᴇɴᴜ ᴏꜰ ɴᴜʀᴏ ᴍᴅ ᴍɪɴɪ ʙᴏᴛ.
-ꜱᴏ ʏᴏᴜ ᴄɴ ꜰɪɴᴅ ᴅᴇᴛᴀɪꜱ ᴏꜰ ᴏᴜʀ ʙᴏᴛ
-ᴜꜱᴇ ᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ꜱʜᴇᴀʀᴇ ᴡʜɪᴛʜ ʏᴏᴜʀ ꜰʀɪᴇɴᴅꜱ\`
+*╰───────────────┈⊷*
+*\`⚠️ ᴛʜɪꜱ ɪꜱ ᴍᴇɴᴜ ᴏꜰ ɴᴜʀᴏ ᴍᴅ ᴍɪɴɪ ʙᴏᴛ.*
+*ꜱᴏ ʏᴏᴜ ᴄɴ ꜰɪɴᴅ ᴅᴇᴛᴀɪꜱ ᴏꜰ ᴏᴜʀ ʙᴏᴛ*
+*ᴜꜱᴇ ᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ꜱʜᴇᴀʀᴇ ᴡʜɪᴛʜ ʏᴏᴜʀ ꜰʀɪᴇɴᴅꜱ\`*
 
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
@@ -2821,8 +2821,8 @@ END:VCARD`
 	  
 	  let vpsOptions = [
         { title: "📥 DOWNLOAD MENU", description: "© ɢᴇᴛ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ", id: `${config.PREFIX}download` },
-		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", id: `${config.PREFIX}creative` },
-		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", id: `${config.PREFIX}tools` },
+		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", id: `${config.PREFIX}tool` },
+		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", id: `${config.PREFIX}other` },
 		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", id: `${config.PREFIX}settings` },
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", id: `${config.PREFIX}owner` }
     ];
@@ -2969,7 +2969,7 @@ END:VCARD`
 }
 
 // ==================== CREATIVE MENU ====================
-case 'creative': {
+case 'tool': {
   try { await socket.sendMessage(sender, { react: { text: "🎨", key: msg.key } }); } catch(e){}
 
   try {
@@ -3037,7 +3037,7 @@ END:VCARD`
 }
 
 // ==================== TOOLS MENU ====================
-case 'tools': {
+case 'other': {
   try { await socket.sendMessage(sender, { react: { text: "🔧", key: msg.key } }); } catch(e){}
 
   try {
@@ -3109,8 +3109,8 @@ END:VCARD`
 `.trim();
 
     const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄" }, type: 1 }
+      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "📜 OWNER" }, type: 1 },
+      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ SETTING" }, type: 1 }
     ];
 
     await socket.sendMessage(sender, {
@@ -3270,12 +3270,12 @@ END:VCARD`
 *👤 𝐍ame: Tharaka Dilshan *
 *📞 𝐍umber: +94721017862*
 
-> 𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝚈 𝐇𝙸𝚁𝚄 𝚇 𝐌𝙳
+> *©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
 
     const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ 𝐒𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝐌𝙴𝙽𝚄" }, type: 1 }
+      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" }, type: 1 },
+      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ SETTINGS" }, type: 1 }
     ];
 
     await socket.sendMessage(sender, {
@@ -4659,7 +4659,7 @@ case 'owner': {
       m.chat,
       {
         contacts: {
-          displayName: '𝐇𝙸𝚁𝚄𝙽 𝐕𝙸𝙺𝙰𝚂𝙸𝚃𝙷𝙰',
+          displayName: 'ᴛʜʀᴀᴋᴀ ᴅɪʟꜱʜᴀɴ',
           contacts: [{ vcard }]
         }
       },
@@ -5815,7 +5815,7 @@ router.get('/active', (req, res) => {
 
 
 router.get('/ping', (req, res) => {
-  res.status(200).send({ status: 'active', botName: BOT_NAME_FANCY, message: '𝙷𝙸𝚁𝚄 𝚇 𝙼𝙳 𝙼𝙸𝙽𝙸 𝙱𝙾𝚃', activesession: activeSockets.size });
+  res.status(200).send({ status: 'active', botName: BOT_NAME_FANCY, message: '𝙽𝚄𝚁𝙾 𝙼𝙳 𝙼𝙸𝙽𝙸 𝙱𝙾𝚃', activesession: activeSockets.size });
 });
 
 router.get('/connect-all', async (req, res) => {
