@@ -9,7 +9,7 @@ require('events').EventEmitter.defaultMaxListeners = 500;
 const pair = require('./pair')
 app.get('/api/active-bots', (req, res) => {
   res.json({
-    count: pair.getActiveSockets()
+    count: activeSockets.size()
   })
 })
 
