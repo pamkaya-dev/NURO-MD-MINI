@@ -204,10 +204,62 @@ h3{
   margin-top:15px;
   font-weight:bold;
 }
+  #activeBots{
+  position: fixed;
+  top: 20px;        /* bottom:20px දාන්නත් පුලුවන් */
+  right: 20px;
+
+  padding: 10px 16px;
+  border-radius: 30px;
+
+  background: rgba(0,242,255,0.12);
+  color: #00f2ff;
+  font-weight: 700;
+  font-size: 14px;
+
+  border: 1px solid #00f2ff;
+  box-shadow:
+    0 0 8px #00f2ff,
+    0 0 18px #00f2ff;
+
+  animation: pulseGlow 1.6s infinite ease-in-out;
+  z-index: 9999;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 6px #00f2ff;
+    opacity: 0.6;
+  }
+  50% {
+    box-shadow: 0 0 24px #00f2ff;
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 6px #00f2ff;
+    opacity: 0.6;
+  }
+}
 </style>
 </head>
+<script>
+async function updateActiveBots(){
+  try{
+    const res = await fetch('/api/active-bots')
+    const data = await res.json()
+    document.getElementById('botCount').innerText = data.count
+  }catch(err){
+    console.log(err)
+  }
+}
 
+updateActiveBots()
+setInterval(updateActiveBots, 3000)
+</script>
 <body>
+<div id="activeBots">
+ 🤖 <span id="botCount">0</span>
+</div>
 <div class="bubble-bg"></div>
 <div class="background-circle c1"></div>
 <div class="background-circle c2"></div>
