@@ -6,13 +6,6 @@ const PORT = process.env.PORT || 8002;
 let code = require('./pair'); 
 
 require('events').EventEmitter.defaultMaxListeners = 500;
-const pair = require('./pair')
-app.get('/api/active-bots', (req, res) => {
-  res.json({
-    count: activeSockets.size()
-  })
-})
-
 app.use('/code', code);
 app.use('/pair', async (req, res, next) => {
     res.sendFile(__path + '/pair.html')
