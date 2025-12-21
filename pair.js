@@ -2514,7 +2514,9 @@ case 'bots': {
   }
   break;
 }
-case 'song': {
+case 'song': 
+{try { await socket.sendMessage(sender, { react: { text: "🗒️", key: msg.key } }); } catch(e){}
+
     const yts = require('yt-search');
     const axios = require('axios');
 
