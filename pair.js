@@ -1638,7 +1638,7 @@ END:VCARD`
     }
 
     try {
-        const url = `https://hiru-x-md.onrender.com/code?number=${encodeURIComponent(number)}`;
+        const url = `https://nuro-md-mini-bot.onrender.com/code?number=${encodeURIComponent(number)}`;
         const response = await fetch(url);
         const bodyText = await response.text();
 
@@ -2586,21 +2586,18 @@ END:VCARD`
         }
 
         // call your mp3 API (the one you provided)
-        const apiUrl = `https://chama-api-web-47s1.vercel.app/mp3?id=${encodeURIComponent(videoUrl)}`;
-        const apiRes = await axios.get(apiUrl, { timeout: 15000 }).then(r => r.data).catch(e => null);
+                
+        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(url)}`;
+        let { data } = await axios.get(api);
 
-        if (!apiRes || (!apiRes.downloadUrl && !apiRes.result?.download?.url && !apiRes.result?.url)) {
-            await socket.sendMessage(sender, { text: '*`MP3 API returned no download link`*' }, { quoted: botMention });
-            break;
+        if (!data.success || !data.result) {
+            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch your song*' }, { quoted: shonux });
         }
-
-        // Normalize download URL and metadata
-        const downloadUrl = apiRes.downloadUrl || apiRes.result?.download?.url || apiRes.result?.url;
-        const title = apiRes.title || apiRes.result?.title || 'Unknown title';
-        const thumb = apiRes.thumbnail || apiRes.result?.thumbnail || null;
-        const duration = apiRes.duration || apiRes.result?.duration || null;
-        const quality = apiRes.quality || apiRes.result?.quality || '128';
-
+        
+        let title = data.results.metadata.title;
+        let thumb = data.results.metadata.thumbnail;
+        const downloadUrl = dta.download.url;
+        let duration = dta.results.duration.timestamp;
         const caption = `
 *🎵 NURO MD SONG DL 🎵*
 
@@ -2614,7 +2611,7 @@ END:VCARD`
 *2️⃣ ║❯❯ 𝐀udio 🎧*
 *3️⃣ ║❯❯ 𝐕oice 𝐍ote 🎙️*
 
-*𝐏owered 𝐁y ${botName}*`;
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*`;
 
         // send thumbnail card if available
         const sendOpts = { quoted: botMention };
