@@ -2586,10 +2586,11 @@ END:VCARD`
             }
             videoUrl = first.url;
         }
-
+let text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();		
+let url = text.split(" ")[1];
         // call your mp3 API (the one you provided)
 		
-        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(videoUrl)}`;
+        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(url)}`;
         let { data } = await axios.get(api);
 
         if (!data.success || !data.result) {
