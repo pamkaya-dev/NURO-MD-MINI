@@ -2586,8 +2586,8 @@ END:VCARD`
         }
 
         // call your mp3 API (the one you provided)
-                
-        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(url)}`;
+		
+        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(videoUrl)}`;
         let { data } = await axios.get(api);
 
         if (!data.success || !data.result) {
