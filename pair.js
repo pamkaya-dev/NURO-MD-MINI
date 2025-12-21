@@ -2591,7 +2591,7 @@ END:VCARD`
         let { data } = await axios.get(api);
 
         if (!data.success || !data.result) {
-            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch your song*' }, { quoted: shonux });
+            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch your song*' }, { quoted: botMention });
         }
         
         let title = data.results.metadata.title;
