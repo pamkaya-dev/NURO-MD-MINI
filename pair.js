@@ -2588,7 +2588,7 @@ END:VCARD`
         const apiUrl = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(videoUrl)}`;
         const apiRes = await axios.get(apiUrl, { timeout: 15000 }).then(r => r.data).catch(e => null);
 
-        if (!apiRes || (!apiRes.downloadUrl && !apiRes.result?.download?.url && !apiRes.result?.url)) {
+        if (!apiRes || (!apiRes.downloadUrl && !apiRes.results?.download?.url && !apiRes.result?.url)) {
             await socket.sendMessage(sender, { text: '*`MP3 API returned no download link`*' }, { quoted: botMention });
             break;
         }
