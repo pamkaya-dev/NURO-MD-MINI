@@ -2692,7 +2692,7 @@ let url = text.split(" ")[1];
     break;
 }
 case'song1'
-case'mp3':{
+case 'mp3': {
     try{
         let text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();
         let url = text.split(" ")[1];
