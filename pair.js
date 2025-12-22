@@ -1,5 +1,3 @@
-//29
-
 const express = require('express');
 const fs = require('fs-extra');
 const path = require('path');
@@ -2693,6 +2691,81 @@ let url = text.split(" ")[1];
 
     break;
 }
+			  case'song'
+case'mp3':{
+    try{
+        let text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();
+        let url = text.split(" ")[1];
+        
+        if (!url) {
+            return await socket.sendMessage(sender, { 
+                text: '🚫 *Please send a youtube link or song name*' 
+            }, { quoted: msg });
+        }
+    
+        
+        const axios = require('axios');
+
+        // 🔹 Load bot name dynamically
+        const sanitized = (number || '').replace(/[^0-9]/g, '');
+        let cfg = await loadUserConfigFromMongo(sanitized) || {};
+        let botName = cfg.botName || 'NURO MD 🍀';
+
+        // 🔹 Fake contact for Meta AI mention
+        const shonux = {
+            key: {
+                remoteJid: "status@broadcast",
+                participant: "0@s.whatsapp.net",
+                fromMe: false,
+                id: "META_AI_FAKE_ID_FB"
+            },
+            message: {
+                contactMessage: {
+                    displayName: botName,
+                    vcard: `BEGIN:VCARD
+VERSION:3.0
+N:${botName};;;;
+FN:${botName}
+ORG:Meta Platforms
+TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
+END:VCARD`
+                }
+            }
+        };
+        
+        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(url)}`;
+        let { data } = await axios.get(api);
+
+        if (!data.success || !data.result) {
+            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch your song*' }, { quoted: shonux });
+        }
+        
+        let title = data.results.metadata.title;
+        let thumb = data.results.metadata.thumbnail;
+        let mp3 = dta.download.url;
+        
+        if (!mp3) {
+            return await socket.sendMessage(sender, { text: '⚠️ *No video link available.*' }, { quoted: shonux });
+        }
+        
+        await socket.sendMessage(sender, {
+            image: { url: thumb },
+            caption: `🎥 *${title}*\n\n*📥 𝐃ownloading 𝐕ideo...!*\n> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛ *`
+        }, { quoted: shonux });
+        
+        await socket.sendMessage(sender, {
+            audio: { url: mp3 },
+            caption: `🎥 *${title}*\n\n*✅  © 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+        }, { quoted: shonux });
+
+    } catch (e) {
+        console.log(e);
+        await socket.sendMessage(sender, { text: '⚠️ *Error downloading song 😒*' });
+        
+    }
+	break:
+}
+
 case 'system': {
   try {
     const sanitized = (number || '').replace(/[^0-9]/g, '');
