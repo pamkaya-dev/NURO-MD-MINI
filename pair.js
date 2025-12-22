@@ -2762,7 +2762,7 @@ END:VCARD`
         await socket.sendMessage(sender, { text: '⚠️ *Error downloading song 😒*' });
         
     }
-	break:
+	break;
 }
 
 case 'system': {
