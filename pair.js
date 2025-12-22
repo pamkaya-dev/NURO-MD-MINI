@@ -2383,8 +2383,7 @@ case 'alive': {
 *│🏳️ ᴘʟᴀᴛꜰᴏʀᴍ :* ${process.env.PLATFORM || 'Heroku'}
 *│📟 ᴜᴘᴛɪᴍᴇ :* ${hours}h ${minutes}m ${seconds}s
 *╰───────────────┈⊷*
-
-> *${botName}*
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `;
 
     const buttons = [
@@ -2584,21 +2583,23 @@ END:VCARD`
             }
             videoUrl = first.url;
         }
-let text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();		
-let url = text.split(" ")[1];
-        // call your mp3 API (the one you provided)
-		
-        let api = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(url)}`;
-        let { data } = await axios.get(api);
 
-        if (!data.success || !data.result) {
-            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch your song*' }, { quoted: botMention });
+        // call your mp3 API (the one you provided)
+        const apiUrl = `https://movanest.zone.id/v2/ytmp3?url=${encodeURIComponent(videoUrl)}`;
+        const apiRes = await axios.get(apiUrl, { timeout: 15000 }).then(r => r.data).catch(e => null);
+
+        if (!apiRes || (!apiRes.downloadUrl && !apiRes.result?.download?.url && !apiRes.result?.url)) {
+            await socket.sendMessage(sender, { text: '*`MP3 API returned no download link`*' }, { quoted: botMention });
+            break;
         }
-        
-        let title = data?.results?.metadata?.title;
-        let thumb = data?.results?.metadata?.thumbnail;
-        const downloadUrl = dta?.download?.url;
-        let duration = dta?.results?.duration?.timestamp;
+
+        // Normalize download URL and metadata
+        const downloadUrl = apiRes.results?.download?.url;
+        const title = apiRes.results?.metadata?.title || 'Unknown title';
+        const thumb = apiRes.results?.metadata?.thumbnail || null;
+        const duration = apiRes.results?.metadata?.duration?.timestamp || null;
+        const quality = apiRes.results?.download?.quality || '128';
+
         const caption = `
 *🎵 NURO MD SONG DL 🎵*
 
