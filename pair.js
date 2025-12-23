@@ -3758,12 +3758,9 @@ END:VCARD`
 ╰──────────────◉◈▻
 > *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
 > *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*`;
-await socket.sendMessage(sender, {
-                            image: { url: thumb },
-							caption: titleText,
-                            contextInfo: { mentionedJid: [sender] },
-                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]	
-                        }, { quoted: botMention });
+        const sendOpts = { quoted: botMention };
+        const media = thumb ? { image: { url: thumb }, caption } : { text: titleText };
+        const resMsg = await socket.sendMessage(sender, media, sendOpts);
         const footer = config.BOT_FOOTER || '';
 
 		const handler = async (msgUpdate) => {
