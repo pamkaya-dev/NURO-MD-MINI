@@ -2662,7 +2662,7 @@ let info = `> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️�
                                 body: apiRes.results?.metadata?.videoId,
                                 mediaType: 1,
                                 thumbnailUrl: apiRes.results?.metadata?.thumbnail, // This should match the image URL provided above
-                                renderLargerThumbnail: true,
+                                renderLargerThumbnail: false,
                                 showAdAttribution: true
                             }
 							}
