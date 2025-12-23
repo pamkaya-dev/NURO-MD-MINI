@@ -2658,7 +2658,7 @@ let info = `> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️�
                             mimetype: "audio/mpeg",
 							contextInfo: {
                             externalAdReply: {
-                                title: ${title},
+                                title:title,
                                 body: apiRes.results?.metadata?.videoId,
                                 mediaType: 1,
                                 thumbnailUrl: apiRes.results?.metadata?.thumbnail, // This should match the image URL provided above
