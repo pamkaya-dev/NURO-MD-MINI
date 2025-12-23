@@ -3726,6 +3726,8 @@ END:VCARD`
 
         const apiUrl = `https://delirius-apiofc.vercel.app/download/tiktok?url=${encodeURIComponent(q)}`;
         const { data } = await axios.get(apiUrl);
+		const apis = `https://movanest.zone.id/v2/tiktok?url=${encodeURIComponent(q)}`;
+		const {datas} = await axios.get(apis);
 
         if (!data.status || !data.data) {
             await socket.sendMessage(sender, { 
@@ -3736,7 +3738,7 @@ END:VCARD`
             }, { quoted: botMention });
             return;
         }
-
+        const thumb = datas?.results?.cover;
         const { title, like, comment, share, author, meta } = data.data;
         const videoUrl = meta.media.find(v => v.type === "video").org;
 		const hddownload = meta.media.find(v => v.type === "video").hd;
@@ -3757,7 +3759,12 @@ const content = `
 ╰──────────────◉◈▻
 > *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
 > *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*`;
-
+await socket.sendMessage(sender, {
+                            image: { url: thumb },
+							caption: titleText,
+                            contextInfo: { mentionedJid: [sender] },
+                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]	
+                        }, { quoted: botMention });
         const footer = config.BOT_FOOTER || '';
 
 		const handler = async (msgUpdate) => {
