@@ -2601,20 +2601,22 @@ END:VCARD`
         const quality = apiRes.results?.download?.quality || '128';
 
         const caption = `
-*🎵 NURO MD SONG DL 🎵*
-
-◉ 🗒️ *𝐓itle:* ${title}
-◉ ⏱️ *𝐃uration:* ${duration || 'N/A'}
-◉ 🔊 *𝐐uality:* ${quality}
-◉ 🔗 *𝐒ource:* ${videoUrl}
-
+*╭─────────────────┈⊷*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚂𝙾𝙽𝙶 𝙳𝙻 🎵*
+*╰─────────────────┈⊷*
+*╭─────────────────┈⊷*
+*│* 🗒️ *𝚃𝙸𝚃𝙻𝙴:* ${title}
+*│* ⏱️ *𝙳𝚄𝚁𝙰𝚃𝙸𝙾𝙽:* ${duration || 'N/A'}
+*│* 🔊 *𝚀𝚄𝙰𝙻𝙸𝚃𝚈:* ${quality}
+*│* 🔗 *𝚂𝙾𝚄𝚁𝙲𝙴:* ${videoUrl}
+*╰─────────────────┈⊷
 *💌 Reply below number to download:*
-*1️⃣ ║❯❯ 𝐃ocument 📁*
-*2️⃣ ║❯❯ 𝐀udio 🎧*
-*3️⃣ ║❯❯ 𝐕oice 𝐍ote 🎙️*
+*1️⃣ ❯ ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*
+*2️⃣ ❯ ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴜᴅɪᴏ 🎧*
+*3️⃣ ❯ ᴅᴏᴡɴʟᴏᴀᴅ ᴠᴏɪᴄᴇ ɴᴏᴛᴇ 🎙️*
 
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*`;
-
+let info = `> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*`;
         // send thumbnail card if available
         const sendOpts = { quoted: botMention };
         const media = thumb ? { image: { url: thumb }, caption } : { text: caption };
@@ -2646,13 +2648,24 @@ END:VCARD`
                         await socket.sendMessage(sender, {
                             document: { url: downloadUrl },
                             mimetype: "audio/mpeg",
-                            fileName: `${title}.mp3`
+                            fileName: `${title}.mp3`,
+                            caption: info
                         }, { quoted: received });
                         break;
                     case "2":
                         await socket.sendMessage(sender, {
                             audio: { url: downloadUrl },
-                            mimetype: "audio/mpeg"
+                            mimetype: "audio/mpeg",
+							contextInfo: {
+                            externalAdReply: {
+                                title: ${title},
+                                body: apiRes.results?.metadata?.videoId,
+                                mediaType: 1,
+                                thumbnailUrl: apiRes.results?.metadata?.thumbnail, // This should match the image URL provided above
+                                renderLargerThumbnail: true,
+                                showAdAttribution: true
+                            }
+							}
                         }, { quoted: received });
                         break;
                     case "3":
@@ -2707,12 +2720,16 @@ case 'system': {
 
     const os = require('os');
     const text = `
-*☘️ 𝐒ystem 𝐈nfo 𝐅or ${botName} ☘️*
-
-*◈ 🧸 𝐎S:* ${os.type()} ${os.release()}
-*◈ 📡 𝐏latform:* ${os.platform()}
-*◈ 🧠 𝐂PU cores:* ${os.cpus().length}
-*◈ 💾 𝐌emory:* ${(os.totalmem()/1024/1024/1024).toFixed(2)} GB
+*╭─────────────────┈⊷*
+*│⚙️ 𝙽𝚄𝚁𝙾 𝙼𝙳 ꜱʏꜱᴛᴇᴍ ɪɴꜰᴏ ⚙️
+*╰─────────────────┈⊷*
+*╭─────────────────┈⊷*
+*│🚀 ᴏꜱ:* ${os.type()} ${os.release()}
+*│🏅 ᴘʟᴀᴛꜰᴏʀᴍ:* ${os.platform()}
+*│⛓️ ᴄᴘᴜ ᴄᴏʀᴇꜱ:* ${os.cpus().length}
+*│💽 ᴍᴇᴍᴏʀʏ:* ${(os.totalmem()/1024/1024/1024).toFixed(2)} GB
+*╰─────────────────┈⊷*
+> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `;
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2721,7 +2738,8 @@ case 'system': {
       image: imagePayload,
       caption: text,
       footer: `*${botName} 𝐒ʏꜱᴛᴇᴍ 𝐈ɴꜰᴏ* `,
-      buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝘔𝘦𝘯𝘶" }, type: 1 }],
+      buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" },type: 1 },
+				{ buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 OWNEE" }, type: 1 }],
       headerType: 4
     }, { quoted: metaQuote });
 
@@ -2776,6 +2794,7 @@ END:VCARD`
     const greetings = hour < 12 ? 'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ..🌅' :
                       hour < 17 ? 'ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ..🌞' :
                       hour < 20 ? 'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ..🌆' : 'ɢᴏᴏᴅ ɴɪɢʜᴛ..🌙';
+	const nuroweb = 'https://nuro-md-mini-bot.onrender.com/';
     const text = `
 *╭──〔 NURO-MD 〕─┈⊷*
 *│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
@@ -2787,9 +2806,10 @@ END:VCARD`
 *│📆* *\`ᴅᴀᴛᴇ:\`* *${slstDate}*
 *│🕜* *\`ᴛɪᴍᴇ:\`* *${formattedTime}*
 *╰───────────────┈⊷*
-*\`⚠️ ᴛʜɪꜱ ɪꜱ ᴍᴇɴᴜ ᴏꜰ ɴᴜʀᴏ ᴍᴅ ᴍɪɴɪ ʙᴏᴛ.*
-*ꜱᴏ ʏᴏᴜ ᴄɴ ꜰɪɴᴅ ᴅᴇᴛᴀɪꜱ ᴏꜰ ᴏᴜʀ ʙᴏᴛ*
-*ᴜꜱᴇ ᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ꜱʜᴇᴀʀᴇ ᴡʜɪᴛʜ ʏᴏᴜʀ ꜰʀɪᴇɴᴅꜱ\`*
+*⚠️ ᴛʜɪꜱ ɪꜱ ᴍᴇɴᴜ ᴏꜰ ɴᴜʀᴏ ᴍᴅ ᴍɪɴɪ ʙᴏᴛ.*
+*ᴜꜱᴇ ᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ꜱʜᴇᴀʀᴇ ᴡʜɪᴛʜ ʏᴏᴜʀ ꜰʀɪᴇɴᴅꜱ*
+
+*🌐 ɴᴜʀᴏ ᴍᴅ ᴡᴇʙ:-* ${nuroweb}
 
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
@@ -2931,10 +2951,10 @@ END:VCARD`
 *│📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔*
 *╰────────────────●►*
 *╭─「 𝐌𝐔𝐒𝐈𝐂 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷*
-*│* 🎵 *𝐌usic 𝐃ownloaders*
 *│* ${config.PREFIX}song [query]
 *│* ${config.PREFIX}csong [jid] [query]
 *│* ${config.PREFIX}ringtone [name]
+*╰─────────────────┈⊷*
 *╭─「 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷
 *│* ${config.PREFIX}tiktok [url]
 *│* ${config.PREFIX}video [query]
@@ -2942,6 +2962,7 @@ END:VCARD`
 *│* ${config.PREFIX}xnxx [query]
 *│* ${config.PREFIX}fb [url]
 *│* ${config.PREFIX}ig [url]
+*╰─────────────────┈⊷*
 *╭─「 𝐀𝐏𝐊 & 𝐅𝐈𝐋𝐄 𝐂𝐌𝐃 」──┈⊷*
 *│* ${config.PREFIX}apk [app id]
 *│* ${config.PREFIX}apksearch [app name]
@@ -3007,6 +3028,7 @@ END:VCARD`
 *│* ${config.PREFIX}ai [message]
 *│* ${config.PREFIX}aiimg [prompt]
 *│* ${config.PREFIX}aiimg2 [prompt]
+*╰──────────────┈⊷*
 *╭─「𝐅𝐀𝐍𝐒𝐘 𝐓𝐎𝐎𝐋」─┈⊷
 *│* ${config.PREFIX}font [text]
 *╰────────────────┈⊷*
@@ -3165,7 +3187,7 @@ case 'getdp': {
             image: { url: ppUrl }, 
             caption: `🖼 *Profile Picture of* +${q}\nFetched by: ${botName}`,
             footer: `🍁 ${botName} 𝐆𝙴𝚃𝙳𝙿*`,
-            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄" }, type: 1 }],
+            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" }, type: 1 }],
             headerType: 4
         }, { quoted: metaQuote }); // <-- botName meta mention
 
@@ -3709,7 +3731,7 @@ END:VCARD`
             await socket.sendMessage(sender, { 
                 text: '*🚩 Failed to fetch TikTok video.*',
                 buttons: [
-                    { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
+                    { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📜 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
                 ]
             }, { quoted: botMention });
             return;
@@ -3717,20 +3739,101 @@ END:VCARD`
 
         const { title, like, comment, share, author, meta } = data.data;
         const videoUrl = meta.media.find(v => v.type === "video").org;
+		const hddownload = meta.media.find(v => v.type === "video").hd;
 
-        const titleText = `*${botName} 𝐓𝙸𝙺𝚃𝙾𝙺 𝐃𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁*`;
-        const content = `┏━━━━━━━━━━━━━━━━\n` +
-                        `┃👤 \`𝐔ser\` : ${author.nickname} (@${author.username})\n` +
-                        `┃📖 \`𝐓itle\` : ${title}\n` +
-                        `┃👍 \`𝐋ikes\` : ${like}\n` +
-                        `┃💬 \`𝐂omments\` : ${comment}\n` +
-                        `┃🔁 \`𝐒hares\` : ${share}\n` +
-                        `┗━━━━━━━━━━━━━━━━`;
+        const titleText = `
+*╭─────────────────┈⊷*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 ᴛɪᴋᴛᴏᴋ 𝙳𝙻 🎵*
+*╰─────────────────┈⊷*`;
+const content = `
+╭──────────────◉◈▻
+┊🍀 *ᴛɪᴛʟᴇ:* \`${title}\`
+╰──────────────◉◈▻
+╭──────────────◉◈▻
+┊ 1. *ɢᴇᴛ ꜱᴅ ᴠɪᴅᴇᴏ*
+┊ 2. *ɢᴇᴛ ʜᴅ ᴠɪᴅᴇᴏ*
+┊ 3. *ɢᴇᴛ ᴀᴜᴅɪᴏ ꜰɪʟᴇ*
+┊ 4. *ɢᴇᴛ ᴀᴜᴅɪᴏ ᴅᴏᴄᴜᴍᴇɴᴛ*
+╰──────────────◉◈▻
+> *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
+> *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*`;
 
         const footer = config.BOT_FOOTER || '';
-        const captionMessage = formatMessage(titleText, content, footer);
 
-        await socket.sendMessage(sender, {
+		const handler = async (msgUpdate) => {
+            try {
+                const received = msgUpdate.messages && msgUpdate.messages[0];
+                if (!received) return;
+
+                const fromId = received.key.remoteJid || received.key.participant || (received.key.fromMe && sender);
+                if (fromId !== sender) return;
+
+                const text = received.message?.conversation || received.message?.extendedTextMessage?.text;
+                if (!text) return;
+
+                // ensure they quoted our card
+                const quotedId = received.message?.extendedTextMessage?.contextInfo?.stanzaId ||
+                    received.message?.extendedTextMessage?.contextInfo?.quotedMessage?.key?.id;
+                if (!quotedId || quotedId !== resMsg.key.id) return;
+
+                const choice = text.toString().trim().split(/\s+/)[0];
+
+                await socket.sendMessage(sender, { react: { text: "📥", key: received.key } });
+
+                switch (choice) {
+                    case "1":
+                        await socket.sendMessage(sender, {
+                            audio: { url: videoUrl },
+							caption: captionMessage,
+                            contextInfo: { mentionedJid: [sender] },
+                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]	
+                        }, { quoted: botMention });
+                        break;
+                    case "2":
+                        await socket.sendMessage(sender, {
+                            video: { url:hddownload },
+							caption: captionMessage,
+                            contextInfo: { mentionedJid: [sender] },
+                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]
+                        }, { quoted: botMention });
+                        break;
+                    case "3":
+                        await socket.sendMessage(sender, {
+                            audio: { url: videoUrl },
+                            mimetype: "audio/mpeg",
+                        }, { quoted: botMention });
+						break;
+                    case "4":
+                        await socket.sendMessage(sender, {
+                            document: { url: videoUrl },
+                            mimetype: "audio/mpeg",
+							fileName: "Facebook_Audio.mp3",
+                            caption: "*ʜᴅ ᴀᴜᴅɪᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ ✅\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\n> ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ*"
+                        }, { quoted: botMention });
+                        break;
+                    default:
+                        await socket.sendMessage(sender, { text: "*Invalid option. Reply with 1, 2 or 3 (quote the card).*" }, { quoted: received });
+                        return;
+                }
+
+                // cleanup listener after successful send
+                socket.ev.off('messages.upsert', handler);
+            } catch (err) {
+                console.error("Song handler error:", err);
+                try { socket.ev.off('messages.upsert', handler); } catch (e) {}
+            }
+        };
+
+        socket.ev.on('messages.upsert', handler);
+
+        // auto-remove handler after 60s
+        setTimeout(() => {
+            try { socket.ev.off('messages.upsert', handler); } catch (e) {}
+        }, 60 * 1000);
+
+		
+
+        /*await socket.sendMessage(sender, {
             video: { url: videoUrl },
             caption: captionMessage,
             contextInfo: { mentionedJid: [sender] },
@@ -3738,7 +3841,7 @@ END:VCARD`
                 { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },
                 { buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }
             ]
-        }, { quoted: botMention });
+        }, { quoted: botMention });*/
 
     } catch (err) {
         console.error("Error in TikTok downloader:", err);
