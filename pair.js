@@ -658,7 +658,7 @@ case 'setting': {
         title: `🔧 ${botName} SETTINGS`,
         sections: [
           {
-            title: '➤ 𝐖𝙾𝚁𝙺 𝐓𝚈𝙿𝙴',
+            title: '◉ ᴛʏᴘᴇ  ᴏꜰ ᴡᴏʀᴋ',
             rows: [
               { title: '𝐏𝚄𝙱𝙻𝙸𝙲', description: '', id: `${prefix}wtype public` },
               { title: '𝐎𝙽𝙻𝚈 𝐆𝚁𝙾𝚄𝙿', description: '', id: `${prefix}wtype groups` },
@@ -667,49 +667,49 @@ case 'setting': {
             ],
           },
           {
-            title: '➤ 𝐅𝙰𝙺𝙴 𝐓𝚈𝙿𝙸𝙽𝙶',
+            title: '◉ ꜰᴀᴋᴇ ᴛʏᴘɪɴɢ',
             rows: [
               { title: '𝐀𝚄𝚃𝙾 𝐓𝚈𝙿𝙸𝙽𝙶 𝐎𝐍', description: '', id: `${prefix}autotyping on` },
               { title: '𝐀𝚄𝚃𝙾 𝐓𝚈𝙿𝙸𝙽𝙶 𝐎𝐅𝐅', description: '', id: `${prefix}autotyping off` },
             ],
           },
           {
-            title: '➤ 𝐅𝙰𝙺𝙴 𝐑𝙴𝙲𝙾𝙳𝙸𝙽𝙶',
+            title: '◉ ꜰᴀᴋᴇ ʀᴇᴄᴏʀᴅɪɴɢ',
             rows: [
               { title: '𝐀𝚄𝚃𝙾 𝐑𝙴𝙲𝙾𝚁𝙳𝙸𝙽𝙶 𝐎𝐍', description: '', id: `${prefix}autorecording on` },
               { title: '𝐀𝚄𝚃𝙾 𝐑𝙴𝙲𝙾𝚁𝙳𝙸𝙽𝙶 𝐎𝐅𝐅', description: '', id: `${prefix}autorecording off` },
             ],
           },
           {
-            title: '➤ 𝐀𝙻𝙻𝚆𝙰𝚈𝚂 𝐎𝙽𝙻𝙸𝙽𝙴',
+            title: '◉ ᴀʟʟᴡᴀʏꜱ ᴏɴʟɪɴᴇ',
             rows: [
               { title: '𝐀𝙻𝙻𝚆𝙰𝚈𝚂 𝐎𝙽𝙻𝙸𝙽𝙴 𝐎𝙽', description: '', id: `${prefix}botpresence online` },
               { title: '𝐀𝙻𝙻𝚆𝙰𝚈𝚂 𝐎𝙽𝙻𝙸𝙽𝙴 𝐎𝙵𝙵', description: '', id: `${prefix}botpresence offline` },
             ],
           },
           {
-            title: '➤ 𝐀𝚄𝚃𝙾 𝐒𝚃𝙰𝚃𝚄𝚂 𝐒𝙴𝙴𝙽',
+            title: '◉ ᴀᴜᴛᴏ ꜱᴇᴇɴ ꜱᴛᴀᴛᴜꜱ',
             rows: [
               { title: '𝐒𝚃𝙰𝚃𝚄𝚂 𝐒𝙴𝙴𝙽 𝐎𝙽', description: '', id: `${prefix}rstatus on` },
               { title: '𝐒𝚃𝙰𝚃𝚄𝚂 𝐒𝙴𝙴𝙽 𝐎𝙵𝙵', description: '', id: `${prefix}rstatus off` },
             ],
           },
           {
-            title: '➤ 𝐀𝚄𝚃𝙾 𝐒𝚃𝙰𝚃𝚄𝚂 𝐑𝙴𝙰𝙲𝚃',
+            title: '◉ ᴀᴜᴛᴏ ʀᴇᴀᴄᴛ ꜱᴛᴀᴛᴜꜱ',
             rows: [
               { title: '𝐒𝚃𝙰𝚃𝚄𝚂 𝐑𝙴𝙰𝙲𝚃 𝐎𝙽', description: '', id: `${prefix}arm on` },
               { title: '𝐒𝚃𝙰𝚃𝚄𝚂 𝐑𝙴𝙰𝙲𝚃 𝐎𝙵𝙵', description: '', id: `${prefix}arm off` },
             ],
           }, 
           {
-            title: '➤ 𝐀𝚄𝚃𝙾 𝐑𝙴𝙹𝙴𝙲𝚃 𝐂𝙰𝙻𝙻',
+            title: '◉ ᴀᴜᴛᴏ ʀᴇᴊᴇᴄᴛ ᴄᴀʟʟꜱ',
             rows: [
               { title: '𝐀𝚄𝚃𝙾 𝐑𝙴𝙹𝙴𝙲𝚃 𝐂𝙰𝙻𝙻 𝐎𝙽', description: '', id: `${prefix}creject on` },
               { title: '𝐀𝚄𝚃𝙾 𝐑𝙴𝙹𝙴𝙲𝚃 𝐂𝙰𝙻𝙻 𝐎𝙵𝙵', description: '', id: `${prefix}creject off` },
             ],
           },
           {
-            title: '➤ 𝐀𝚄𝚃𝙾 𝐌𝙰𝚂𝚂𝙰𝙶𝙴 𝐑𝙴𝙰𝙳',
+            title: '◉ ᴀᴜᴛᴏ ʀᴇᴀᴅ ᴍᴇꜱꜱᴀɢᴇꜱ',
             rows: [
               { title: '𝐑𝙴𝙰𝙳 𝐀𝙻𝙻 𝐌𝙰𝚂𝚂𝙰𝙶𝙴𝚂', description: '', id: `${prefix}mread all` },
               { title: '𝐑𝙴𝙰𝙳 𝐀𝙻𝙻 𝐌𝙰𝚂𝚂𝙰𝙶𝙴𝚂 𝐂𝙾𝙼𝙼𝙰𝙽𝙳𝚂', description: '', id: `${prefix}mread cmd` },
@@ -2424,9 +2424,14 @@ case 'ping': {
     };
 
     const text = `
-*📡 ${botName} 𝐏𝙸𝙽𝙶*
-*🏓 𝐋atency:* ${latency}ms
-*⏱ 𝐒erver 𝐓ime:* ${new Date().toLocaleString()}
+*╭─────────────────┈⊷*
+*│ ⚡ ɴᴜʀᴏ ᴍᴅ ꜱᴘᴇᴇᴅ*
+*╰─────────────────┈⊷*
+*╭─────────────────┈⊷*
+*│ ɴᴜʀᴏ ᴍᴅ ${botName}ᴘɪɴɢ*
+*│ ʟᴀᴛᴇɴᴄʏ:* ${latency}ᴍꜱ
+*│ ᴛɪᴍᴇ ᴏꜰ ꜱᴇʀᴠᴇʀ:* ${new Date().toLocaleString()}
+*╰─────────────────┈⊷*
 `;
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2434,7 +2439,7 @@ case 'ping': {
     await socket.sendMessage(sender, {
       image: imagePayload,
       caption: text,
-      footer: ` *${botName} 𝐏𝙸𝙽𝙶*`,
+      footer: `*© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*`,
       buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝘔𝘦𝘯𝘶" }, type: 1 }],
       headerType: 4
     }, { quoted: metaQuote });
@@ -2841,11 +2846,11 @@ END:VCARD`
     }, { quoted: shonux });*/
 	  
 	  let vpsOptions = [
-        { title: "📥 DOWNLOAD MENU", description: "© ɢᴇᴛ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ", id: `${config.PREFIX}download` },
-		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", id: `${config.PREFIX}tool` },
-		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", id: `${config.PREFIX}other` },
-		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", id: `${config.PREFIX}settings` },
-        { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", id: `${config.PREFIX}owner` }
+        { title: "📥 DOWNLOAD MENU", description: "© ɢᴇᴛ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}download` },
+		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}tool` },
+		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}other` },
+		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}settings` },
+        { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
     ];
 
     let buttonSections = [
@@ -2870,12 +2875,12 @@ END:VCARD`
             }
         },
         {
-            buttonId: `${config.PREFIX}ping}`,
+            buttonId: `${config.PREFIX}ping`,
             buttonText: { displayText: '⚡ PING' },
             type: 1
         },
         {
-            buttonId: `${config.PREFIX}creative`,
+            buttonId: `${config.PREFIX}owner`,
             buttonText: { displayText: '👑 OWNER' },
             type: 1
         }
