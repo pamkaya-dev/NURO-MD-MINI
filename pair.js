@@ -3700,7 +3700,7 @@ TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
 END:VCARD`
                 }
             }
-        }};
+        };
     if (!args.length || !args.join(' ').startsWith('https://')) {
         await socket.sendMessage(sender, {
             image: {
