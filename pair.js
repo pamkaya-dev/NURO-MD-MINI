@@ -1850,83 +1850,6 @@ case 'deleteme': {
   }
   break;
 }
-case 'fb':
-case 'fbdl':
-case 'facebook':
-case 'fbd': {
-    try {
-        let text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();
-        let url = text.split(" ")[1]; // e.g. .fb <link>
-
-        if (!url) {
-            return await socket.sendMessage(sender, { 
-                text: '🚫 *Please send a Facebook video link.*\n\nExample: .fb <url>' 
-            }, { quoted: msg });
-        }
-
-        const axios = require('axios');
-
-        // 🔹 Load bot name dynamically
-        const sanitized = (number || '').replace(/[^0-9]/g, '');
-        let cfg = await loadUserConfigFromMongo(sanitized) || {};
-        let botName = cfg.botName || 'NURO MD 🍀';
-
-        // 🔹 Fake contact for Meta AI mention
-        const shonux = {
-            key: {
-                remoteJid: "status@broadcast",
-                participant: "0@s.whatsapp.net",
-                fromMe: false,
-                id: "META_AI_FAKE_ID_FB"
-            },
-            message: {
-                contactMessage: {
-                    displayName: botName,
-                    vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-                }
-            }
-        };
-
-        // 🔹 Call API
-        let api = `https://tharuzz-ofc-api-v2.vercel.app/api/download/fbdl?url=${encodeURIComponent(url)}`;
-        let { data } = await axios.get(api);
-
-        if (!data.success || !data.result) {
-            return await socket.sendMessage(sender, { text: '❌ *Failed to fetch Facebook video.*' }, { quoted: shonux });
-        }
-
-        let title = data.result.title || 'Facebook Video';
-        let thumb = data.result.thumbnail;
-        let hdLink = data.result.dlLink?.hdLink || data.result.dlLink?.sdLink; // Prefer HD else SD
-
-        if (!hdLink) {
-            return await socket.sendMessage(sender, { text: '⚠️ *No video link available.*' }, { quoted: shonux });
-        }
-
-        // 🔹 Send thumbnail + title first
-        await socket.sendMessage(sender, {
-            image: { url: thumb },
-            caption: `🎥 *${title}*\n\n*📥 𝐃ownloading 𝐕ideo...*\n*𝐏owered 𝐁y ${botName}*`
-        }, { quoted: shonux });
-
-        // 🔹 Send video automatically
-        await socket.sendMessage(sender, {
-            video: { url: hdLink },
-            caption: `🎥 *${title}*\n\n*✅ 𝐃ownloaded 𝐁y ${botName}*`
-        }, { quoted: shonux });
-
-    } catch (e) {
-        console.log(e);
-        await socket.sendMessage(sender, { text: '⚠️ *Error downloading Facebook video.*' });
-    }
-	break;
-}
 case 'facebook':
 case 'fbdl':
 case 'fb1':
@@ -1994,7 +1917,8 @@ END:VCARD`
             });
         }
 
-        const captionMessage = formatMessage(`
+        const captionMessage = formatMessage(
+`
 *╭─────────────────┈⊷*
 *│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝙵𝙱 𝙳𝙻 🎵*
 *╰─────────────────┈⊷*`,
@@ -2050,7 +1974,7 @@ END:VCARD`
                         mimetype: 'video/mp4',
                         caption: formatMessage(
                             '✅ FB VIDEO',
-                            'No Watermark Video',
+                            'HD VIDEO DOWNLOADED BY NURO MD',
                             `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
                         )
                     };
@@ -2063,7 +1987,7 @@ END:VCARD`
                         mimetype: 'video/mp4',
                         caption: formatMessage(
                             '✅ FB VIDEO',
-                            'With Watermark Video',
+                            'SD VIDEO DOWNLOADED BY NURO MD',
                             `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
                         )
                     };
