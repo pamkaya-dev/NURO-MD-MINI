@@ -3721,8 +3721,10 @@ END:VCARD`
     });
 
         const tiktokUrl = args.join(' ');
+		const ttapi = await axios.get(`https://movanest.zone.id/v2/tiktok?url=${encodeURIComponent(tiktokUrl)}`)
         const response = await axios.get(`https://api.bk9.dev/download/tiktok2?url=${encodeURIComponent(tiktokUrl)}`);
-        const tiktokData = response.data.BK9;
+        const tiktokData = response?.data?.BK9;
+		const ttapis = ttapi?.results;
         if (!response.data.status || !tiktokData) {
             await socket.sendMessage(sender, {
                 image: {
@@ -3736,9 +3738,11 @@ END:VCARD`
             });
         }
 
-        const captionMessage = formatMessage(
-            '*╭─────────────────┈⊷*\n*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚂𝙾𝙽𝙶 𝙳𝙻 🎵*\n*╰─────────────────┈⊷*',
-            `*📥TIK TOK DOWNLOAD MENU*
+        const captionMessage = formatMessage(`
+*╭─────────────────┈⊷*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚂𝙾𝙽𝙶 𝙳𝙻 🎵*
+*╰─────────────────┈⊷*`,
+`*📥TIK TOK DOWNLOAD MENU*
 ╭──────────────◉◈▻
 ┊ 1. *ɴᴏ ᴡᴀᴛᴇʀᴍᴀʀᴋ ᴠɪᴅᴇᴏ*
 ┊ 2. *ᴡʜɪᴛʜ ᴡᴀᴛᴇʀᴍᴀʀᴋ ᴠɪᴅᴇᴏ*
@@ -3751,7 +3755,7 @@ END:VCARD`
 
         const sentMessage = await socket.sendMessage(sender, {
             image: {
-                url: tiktokData.thumbnail || config.RCD_IMAGE_PATH
+                url: ttapis?.cover || config.RCD_IMAGE_PATH
             },
             caption: captionMessage
         }, {
@@ -3778,12 +3782,11 @@ END:VCARD`
 
                 const downloadLinks = tiktokData.video;
                 let mediaMessage;
-
                 switch (userResponse) {
                 case '1':
                     mediaMessage = {
                         video: {
-                            url: downloadLinks.noWatermark
+                            url: downloadLinks.noWatermark || ttapis?.no_watermark
                         },
                         mimetype: 'video/mp4',
                         caption: formatMessage(
@@ -3796,7 +3799,7 @@ END:VCARD`
                 case '2':
                     mediaMessage = {
                         video: {
-                            url: downloadLinks.withWatermark
+                            url: downloadLinks.withWatermark || ttapis?.watermark
                         },
                         mimetype: 'video/mp4',
                         caption: formatMessage(
@@ -3809,7 +3812,7 @@ END:VCARD`
                 case '3':
                     mediaMessage = {
                         audio: {
-                            url: tiktokData.audio
+                            url: tiktokData.audio || ttapis?.music
                         },
                         mimetype: 'audio/mpeg',
                         caption: formatMessage(
@@ -3822,7 +3825,7 @@ END:VCARD`
                 case '4':
                     mediaMessage = {
                         video: {
-                            url: downloadLinks.noWatermark
+                            url: downloadLinks.noWatermark || ttapis?.no_watermark
                         },
                         mimetype: 'video/mp4',
                         ptv: true,
@@ -3871,26 +3874,6 @@ END:VCARD`
     }
     break;
 	}
-        /*await socket.sendMessage(sender, {
-            video: { url: videoUrl },
-            caption: captionMessage,
-            contextInfo: { mentionedJid: [sender] },
-            buttons: [
-                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },
-                { buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }
-            ]
-        }, { quoted: botMention });*/
-
-   /* } catch (err) {
-        console.error("Error in TikTok downloader:", err);
-        await socket.sendMessage(sender, { 
-            text: '*❌ Internal Error. Please try again later.*',
-            buttons: [
-                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
-            ]
-        });
-    }
-    break;*/
 case 'xvideo': {
   try {
     // ---------------------------
