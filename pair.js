@@ -3702,144 +3702,185 @@ END:VCARD`
                 }
             }
         };
+    if (!args.length || !args.join(' ').startsWith('https://')) {
+        await socket.sendMessage(sender, {
+            image: {
+                url: config.RCD_IMAGE_PATH
+            },
+            caption: formatMessage(
+                '❌ ERROR',
+                'Please provide a valid TikTok URL!\nExample: .tiktok https://www.tiktok.com/@user/video/nuro',
+                `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+            )
+        });
+        break;
+    }
 
-        const text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').trim();
-        const q = text.split(" ").slice(1).join(" ").trim();
+    await socket.sendMessage(sender, {
+        react: {
+            text: '⬇️', key: msg.key
+        }
+    });
 
-        if (!q) {
-            await socket.sendMessage(sender, { 
-                text: '*🚫 Please provide a TikTok video link.*',
-                buttons: [
-                    { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
-                ]
-            }, { quoted: botMention });
-            return;
+    try {
+        const tiktokUrl = args.join(' ');
+        const response = await axios.get(`https://api.bk9.dev/download/tiktok2?url=${encodeURIComponent(tiktokUrl)}`);
+        const tiktokData = response.data.BK9;
+        if (!response.data.status || !tiktokData) {
+            await socket.sendMessage(sender, {
+                image: {
+                    url:config.RCD_IMAGE_PATH
+                },
+                caption: formatMessage(
+                    '❌ ERROR',
+                    'Failed to fetch TikTok video! Please try again later.',
+                    `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                )
+            });
+            break;
         }
 
-        if (!q.includes("tiktok.com")) {
-            await socket.sendMessage(sender, { 
-                text: '*🚫 Invalid TikTok link.*',
-                buttons: [
-                    { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
-                ]
-            }, { quoted: botMention });
-            return;
-        }
-
-        await socket.sendMessage(sender, { react: { text: '🎵', key: msg.key } });
-        await socket.sendMessage(sender, { text: '*⏳ Downloading TikTok video...*' }, { quoted: botMention });
-
-        const apiUrl = `https://delirius-apiofc.vercel.app/download/tiktok?url=${encodeURIComponent(q)}`;
-        const { data } = await axios.get(apiUrl);
-		const apis = `https://movanest.zone.id/v2/tiktok?url=${encodeURIComponent(q)}`;
-		const {datas} = await axios.get(apis);
-
-        if (!data.status || !data.data) {
-            await socket.sendMessage(sender, { 
-                text: '*🚩 Failed to fetch TikTok video.*',
-                buttons: [
-                    { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📜 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
-                ]
-            }, { quoted: botMention });
-            return;
-        }
-        const thumb = datas?.results?.cover;
-        const { title, like, comment, share, author, meta } = data.data;
-        const videoUrl = meta.media.find(v => v.type === "video").org;
-		const hddownload = meta.media.find(v => v.type === "video").hd;
-
-        const titleText = `
-*╭──────────────┈⊷*
-*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 ᴛɪᴋᴛᴏᴋ 𝙳𝙻 🎵*
-*╰──────────────┈⊷*
+        const captionMessage = formatMessage(
+            '*╭─────────────────┈⊷*\n*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚂𝙾𝙽𝙶 𝙳𝙻 🎵*\n*╰─────────────────┈⊷*',
+            `*📥TIK TOK DOWNLOAD MENU*
 ╭──────────────◉◈▻
-┊🍀 *ᴛɪᴛʟᴇ:* \`${title}\`
-╰──────────────◉◈▻
-╭──────────────◉◈▻
-┊ 1. *ɢᴇᴛ ꜱᴅ ᴠɪᴅᴇᴏ*
-┊ 2. *ɢᴇᴛ ʜᴅ ᴠɪᴅᴇᴏ*
+┊ 1. *ɴᴏ ᴡᴀᴛᴇʀᴍᴀʀᴋ ᴠɪᴅᴇᴏ*
+┊ 2. *ᴡʜɪᴛʜ ᴡᴀᴛᴇʀᴍᴀʀᴋ ᴠɪᴅᴇᴏ*
 ┊ 3. *ɢᴇᴛ ᴀᴜᴅɪᴏ ꜰɪʟᴇ*
-┊ 4. *ɢᴇᴛ ᴀᴜᴅɪᴏ ᴅᴏᴄᴜᴍᴇɴᴛ*
+┆ 4. *ɢᴇᴛ ᴠɪᴅᴇᴏ ɴᴏᴛᴇ*
 ╰──────────────◉◈▻
 > *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
-> *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*`;
-        const sendOpts = { quoted: botMention };
-        const media = thumb ? { image: { url: thumb }, caption } : { text: titleText };
-        const resMsg = await socket.sendMessage(sender, media, sendOpts);
-        const footer = config.BOT_FOOTER || '';
+> *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*
+            `);
 
-		const handler = async (msgUpdate) => {
-            try {
-                const received = msgUpdate.messages && msgUpdate.messages[0];
-                if (!received) return;
+        const sentMessage = await socket.sendMessage(sender, {
+            image: {
+                url: tiktokData.thumbnail || config.RCD_IMAGE_PATH
+            },
+            caption: captionMessage
+        }, {
+            quoted: botMention
+        });
 
-                const fromId = received.key.remoteJid || received.key.participant || (received.key.fromMe && sender);
-                if (fromId !== sender) return;
+        const messageID = sentMessage.key.id;
 
-                const text = received.message?.conversation || received.message?.extendedTextMessage?.text;
-                if (!text) return;
+        const handleTikTokSelection = async ({
+            messages: replyMessages
+        }) => {
+            const replyMek = replyMessages[0];
+            if (!replyMek?.message) return;
 
-                // ensure they quoted our card
-                const quotedId = received.message?.extendedTextMessage?.contextInfo?.stanzaId ||
-                    received.message?.extendedTextMessage?.contextInfo?.quotedMessage?.key?.id;
-                if (!quotedId || quotedId !== resMsg.key.id) return;
+            const userResponse = replyMek.message.conversation || replyMek.message.extendedTextMessage?.text;
+            const isReplyToSentMsg = replyMek.message.extendedTextMessage?.contextInfo?.stanzaId === messageID;
 
-                const choice = text.toString().trim().split(/\s+/)[0];
+            if (isReplyToSentMsg && sender === replyMek.key.remoteJid) {
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '⬇️', key: replyMek.key
+                    }
+                });
 
-                await socket.sendMessage(sender, { react: { text: "📥", key: received.key } });
+                const downloadLinks = tiktokData.video;
+                let mediaMessage;
 
-                switch (choice) {
-                    case "1":
-                        await socket.sendMessage(sender, {
-                            audio: { url: videoUrl },
-							caption: captionMessage,
-                            contextInfo: { mentionedJid: [sender] },
-                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]	
-                        }, { quoted: botMention });
-                        break;
-                    case "2":
-                        await socket.sendMessage(sender, {
-                            video: { url:hddownload },
-							caption: captionMessage,
-                            contextInfo: { mentionedJid: [sender] },
-                            buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 },{ buttonId: `${config.PREFIX}alive`, buttonText: { displayText: '📡 𝐁𝙾𝚃 𝐈𝙽𝙵𝙾' }, type: 1 }]
-                        }, { quoted: botMention });
-                        break;
-                    case "3":
-                        await socket.sendMessage(sender, {
-                            audio: { url: videoUrl },
-                            mimetype: "audio/mpeg",
-                        }, { quoted: botMention });
-						break;
-                    case "4":
-                        await socket.sendMessage(sender, {
-                            document: { url: videoUrl },
-                            mimetype: "audio/mpeg",
-							fileName: "Facebook_Audio.mp3",
-                            caption: "*ʜᴅ ᴀᴜᴅɪᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ ✅\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\n> ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ*"
-                        }, { quoted: botMention });
-                        break;
-                    default:
-                        await socket.sendMessage(sender, { text: "*Invalid option. Reply with 1, 2 or 3 (quote the card).*" }, { quoted: received });
-                        return;
+                switch (userResponse) {
+                case '1':
+                    mediaMessage = {
+                        video: {
+                            url: downloadLinks.noWatermark
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ TIKTOK VIDEO',
+                            'No Watermark Video',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '2':
+                    mediaMessage = {
+                        video: {
+                            url: downloadLinks.withWatermark
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ TIKTOK VIDEO',
+                            'With Watermark Video',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '3':
+                    mediaMessage = {
+                        audio: {
+                            url: tiktokData.audio
+                        },
+                        mimetype: 'audio/mpeg',
+                        caption: formatMessage(
+                            '✅ TIKTOK AUDIO',
+                            'Audio Only',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '4':
+                    mediaMessage = {
+                        video: {
+                            url: downloadLinks.noWatermark
+                        },
+                        mimetype: 'video/mp4',
+                        ptv: true,
+                        caption: formatMessage(
+                            '✅ TIKTOK PTV',
+                            'Video Note (PTV)',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                default:
+                    await socket.sendMessage(sender, {
+                        image: {
+                            url: config.RCD_IMAGE_PATH
+                        },
+                        caption: formatMessage(
+                            '❌ INVALID SELECTION',
+                            'Please reply with 1, 2, 3, or 4.',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    });
+                    return;
                 }
 
-                // cleanup listener after successful send
-                socket.ev.off('messages.upsert', handler);
-            } catch (err) {
-                console.error("Song handler error:", err);
-                try { socket.ev.off('messages.upsert', handler); } catch (e) {}
+                await socket.sendMessage(sender, mediaMessage, {
+                    quoted: replyMek
+                });
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '✅', key: replyMek.key
+                    }
+                });
+                socket.ev.removeListener('messages.upsert', handleTikTokSelection);
             }
         };
 
-        socket.ev.on('messages.upsert', handler);
+        socket.ev.on('messages.upsert', handleTikTokSelection);
+    } catch (error) {
 
-        // auto-remove handler after 60s
-        setTimeout(() => {
-            try { socket.ev.off('messages.upsert', handler); } catch (e) {}
-        }, 60 * 1000);
-
-		
+        await socket.sendMessage(sender, {
+            image: {
+                url: config.RCD_IMAGE_PATH
+            },
+            caption: formatMessage(
+                '❌ ERROR',
+                `Failed to process TikTok request: ${error.message}`,
+                `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+            ),
+			buttons: [
+                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
+            ]
+        });
+    };
+    break;
 
         /*await socket.sendMessage(sender, {
             video: { url: videoUrl },
@@ -3851,7 +3892,7 @@ END:VCARD`
             ]
         }, { quoted: botMention });*/
 
-    } catch (err) {
+   /* } catch (err) {
         console.error("Error in TikTok downloader:", err);
         await socket.sendMessage(sender, { 
             text: '*❌ Internal Error. Please try again later.*',
@@ -3860,7 +3901,7 @@ END:VCARD`
             ]
         });
     }
-    break;
+    break;*/
 }
 case 'xvideo': {
   try {
