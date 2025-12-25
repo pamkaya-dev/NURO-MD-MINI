@@ -1925,11 +1925,214 @@ END:VCARD`
         console.log(e);
         await socket.sendMessage(sender, { text: '⚠️ *Error downloading Facebook video.*' });
     }
+	break;
 }
-break;
+case 'facebook':
+case 'fbdl':
+case 'fb':
+case 'fbdl': {
+    try {
+        // 🔹 Load bot name dynamically
+        const sanitized = (number || '').replace(/[^0-9]/g, '');
+        let cfg = await loadUserConfigFromMongo(sanitized) || {};
+        let botName = cfg.botName || 'NURO MD 🍀';
 
+        // 🔹 Fake contact for Meta AI mention
+        const botMention = {
+            key: {
+                remoteJid: "status@broadcast",
+                participant: "0@s.whatsapp.net",
+                fromMe: false,
+                id: "META_AI_FAKE_ID_TT"
+            },
+            message: {
+                contactMessage: {
+                    displayName: botName,
+                    vcard: `BEGIN:VCARD
+VERSION:3.0
+N:${botName};;;;
+FN:${botName}
+ORG:Meta Platforms
+TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
+END:VCARD`
+                }
+            }
+        };
+    if (!args.length || !args.join(' ').startsWith('https://')) {
+        await socket.sendMessage(sender, {
+            image: {
+                url: config.RCD_IMAGE_PATH
+            },
+            caption: formatMessage(
+                '❌ ERROR',
+                'Please provide a valid Fb URL!\nExample: .facebook https://www.facebook.com/@user/video/nuro',
+                `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+            )
+		});
+    }
 
+    await socket.sendMessage(sender, {
+        react: {
+            text: '⬇️', key: msg.key
+        }
+    });
 
+        const fbUrl = args.join(' ');
+        const response = await axios.get(`https://api.bk9.dev/download/fb3?url=${encodeURIComponent(fbUrl)}`);
+        const fbData = response?.data?.BK9;
+        xonst video = fbData?.formats;
+        if (!response.data.status || !fbData) {
+            await socket.sendMessage(sender, {
+                image: {
+                    url:config.RCD_IMAGE_PATH
+                },
+                caption: formatMessage(
+                    '❌ ERROR',
+                    'Failed to fetch TikTok video! Please try again later.',
+                    `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                )
+            });
+        }
+
+        const captionMessage = formatMessage(`
+*╭─────────────────┈⊷*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝙵𝙱 𝙳𝙻 🎵*
+*╰─────────────────┈⊷*`,
+`*📥FB DOWNLOAD MENU*
+╭──────────────◉◈▻
+┊ 1. *ɢᴇᴛ ʜᴅ ᴠɪᴅᴇᴏ*
+┊ 2. *ɢᴇᴛ ꜱᴅ ᴠɪᴅᴇᴏ*
+┊ 3. *ɢᴇᴛ ᴀᴜᴅɪᴏ ꜰɪʟᴇ*
+┆ 4. *ɢᴇᴛ ᴠɪᴅᴇᴏ ɴᴏᴛᴇ*
+╰──────────────◉◈▻
+> *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
+> *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*
+            `);
+
+        const sentMessage = await socket.sendMessage(sender, {
+            image: {
+                url: fbData?.thumbnail || config.RCD_IMAGE_PATH
+            },
+            caption: captionMessage
+        }, {
+            quoted: botMention
+        });
+
+        const messageID = sentMessage.key.id;
+
+        const handleTikTokSelection = async ({
+            messages: replyMessages
+        }) => {
+            const replyMek = replyMessages[0];
+            if (!replyMek?.message) return;
+
+            const userResponse = replyMek.message.conversation || replyMek.message.extendedTextMessage?.text;
+            const isReplyToSentMsg = replyMek.message.extendedTextMessage?.contextInfo?.stanzaId === messageID;
+
+            if (isReplyToSentMsg && sender === replyMek.key.remoteJid) {
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '⬇️', key: replyMek.key
+                    }
+                });
+                
+                const hd = video?.[0];
+                const hdurl = hd?.url
+                const sd = video?.[1];
+                const sdurl = sd?.url
+                let mediaMessage;
+                switch (userResponse) {
+                case '1':
+                    mediaMessage = {
+                        video: {
+                            url: hdurl
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ FB VIDEO',
+                            'No Watermark Video',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '2':
+                    mediaMessage = {
+                        video: {
+                            url: sdurl
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ FB VIDEO',
+                            'With Watermark Video',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '3':
+                    mediaMessage = {
+                        audio: {
+                            url: sdurl
+                        },
+                        mimetype: 'audio/mpeg',
+                        caption: formatMessage(
+                            '✅ FB AUDIO',
+                            'Audio Only',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '4':
+                    mediaMessage = {
+                        video: {
+                            url: sdurl
+                        },
+                        mimetype: 'video/mp4',
+                        ptv: true,
+                        caption: formatMessage(
+                            '✅ FB VIDEO',
+                            'Video Note (PTV)',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                default:
+                    await socket.sendMessage(sender, {
+                        image: {
+                            url: config.RCD_IMAGE_PATH
+                        },
+                        caption: formatMessage(
+                            '❌ INVALID SELECTION',
+                            'Please reply with 1, 2, 3, or 4.',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    });
+                    return;
+                }
+
+                await socket.sendMessage(sender, mediaMessage, {
+                    quoted: replyMek
+                });
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '✅', key: replyMek.key
+                    }
+                });
+                socket.ev.removeListener('messages.upsert', handleTikTokSelection);
+            }
+        };
+
+        socket.ev.on('messages.upsert', handleTikTokSelection);
+    } catch (err) {
+        console.error("Error in FB downloadee:", err);
+        await socket.sendMessage(sender, { 
+            text: '*❌ Internal Error. Please try again later.*',
+            buttons: [
+                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
+            ]
+        });
+    }
+    break;
+	}
 
 case 'cfn': {
   const sanitized = (number || '').replace(/[^0-9]/g, '');
