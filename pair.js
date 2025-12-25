@@ -3700,7 +3700,7 @@ TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
 END:VCARD`
                 }
             }
-        };
+        }};
     if (!args.length || !args.join(' ').startsWith('https://')) {
         await socket.sendMessage(sender, {
             image: {
@@ -3711,8 +3711,7 @@ END:VCARD`
                 'Please provide a valid TikTok URL!\nExample: .tiktok https://www.tiktok.com/@user/video/nuro',
                 `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
             )
-        });
-        break;
+		});
     }
 
     await socket.sendMessage(sender, {
@@ -3736,7 +3735,6 @@ END:VCARD`
                     `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
                 )
             });
-            break;
         }
 
         const captionMessage = formatMessage(
@@ -3863,24 +3861,17 @@ END:VCARD`
         };
 
         socket.ev.on('messages.upsert', handleTikTokSelection);
-    } catch (error) {
-
-        await socket.sendMessage(sender, {
-            image: {
-                url: config.RCD_IMAGE_PATH
-            },
-            caption: formatMessage(
-                '❌ ERROR',
-                `Failed to process TikTok request: ${error.message}`,
-                `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
-            ),
-			buttons: [
+    } catch (err) {
+        console.error("Error in TikTok downloader:", err);
+        await socket.sendMessage(sender, { 
+            text: '*❌ Internal Error. Please try again later.*',
+            buttons: [
                 { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
             ]
         });
-    };
+    }
     break;
-
+	}
         /*await socket.sendMessage(sender, {
             video: { url: videoUrl },
             caption: captionMessage,
