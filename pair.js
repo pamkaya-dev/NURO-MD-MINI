@@ -1929,7 +1929,7 @@ END:VCARD`
 }
 case 'facebook':
 case 'fbdl':
-case 'fb':
+case 'fb1':
 case 'fbdl': {
     try {
         // 🔹 Load bot name dynamically
