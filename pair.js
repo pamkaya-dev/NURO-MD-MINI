@@ -3720,7 +3720,6 @@ END:VCARD`
         }
     });
 
-    try {
         const tiktokUrl = args.join(' ');
         const response = await axios.get(`https://api.bk9.dev/download/tiktok2?url=${encodeURIComponent(tiktokUrl)}`);
         const tiktokData = response.data.BK9;
