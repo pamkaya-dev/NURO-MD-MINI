@@ -1980,7 +1980,7 @@ END:VCARD`
         const fbUrl = args.join(' ');
         const response = await axios.get(`https://api.bk9.dev/download/fb3?url=${encodeURIComponent(fbUrl)}`);
         const fbData = response?.data?.BK9;
-        xonst video = fbData?.formats;
+        const video = fbData?.formats;
         if (!response.data.status || !fbData) {
             await socket.sendMessage(sender, {
                 image: {
