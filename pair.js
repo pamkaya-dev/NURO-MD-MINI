@@ -682,7 +682,7 @@ END:VCARD`
     });
 
         const ytUrl = args.join(' ');
-        const response = await axios.get(`https://api.bk9.dev/download/youtube?url=${encodeURIComponent(fbUrl)}`);
+        const response = await axios.get(`https://api.bk9.dev/download/youtube?url=${encodeURIComponent(ytUrl)}`);
         const ytData = response?.data?.BK9;
         const videos = ytData?.formats;
         const title = ytData?.title;
