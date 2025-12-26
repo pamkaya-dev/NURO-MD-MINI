@@ -631,6 +631,219 @@ END:VCARD`
     break;
 }
 
+case 'youtube':
+case 'ytdl':
+case 'video':
+case 'mp4': {
+    try {
+        // 🔹 Load bot name dynamically
+        const sanitized = (number || '').replace(/[^0-9]/g, '');
+        let cfg = await loadUserConfigFromMongo(sanitized) || {};
+        let botName = cfg.botName || 'NURO MD 🍀';
+
+        // 🔹 Fake contact for Meta AI mention
+        const botMention = {
+            key: {
+                remoteJid: "status@broadcast",
+                participant: "0@s.whatsapp.net",
+                fromMe: false,
+                id: "META_AI_FAKE_ID_TT"
+            },
+            message: {
+                contactMessage: {
+                    displayName: botName,
+                    vcard: `BEGIN:VCARD
+VERSION:3.0
+N:${botName};;;;
+FN:${botName}
+ORG:Meta Platforms
+TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
+END:VCARD`
+                }
+            }
+        };
+    if (!args.length || !args.join(' ').startsWith('https://')) {
+        await socket.sendMessage(sender, {
+            image: {
+                url: config.RCD_IMAGE_PATH
+            },
+            caption: formatMessage(
+                '❌ ERROR',
+                'Please provide a valid Fb URL!\nExample: .youtube https://www.youtube.com/@user/video/nuro',
+                `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+            )
+		});
+    }
+
+    await socket.sendMessage(sender, {
+        react: {
+            text: '⬇️', key: msg.key
+        }
+    });
+
+        const ytUrl = args.join(' ');
+        const response = await axios.get(`https://api.bk9.dev/download/youtube?url=${encodeURIComponent(fbUrl)}`);
+        const ytData = response?.data?.BK9;
+        const videos = ytData?.formats;
+        const title = ytData?.title;
+        if (!response.data.status || !ytData) {
+            await socket.sendMessage(sender, {
+                image: {
+                    url:config.RCD_IMAGE_PATH
+                },
+                caption: formatMessage(
+                    '❌ ERROR',
+                    'Failed to fetch TikTok video! Please try again later.',
+                    `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                )
+            });
+        }
+
+        const captionMessage = formatMessage(
+`
+*╭─────────────────┈⊷*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚈𝚃 𝙳𝙻 🎵*
+*╰─────────────────┈⊷*
+*╭─────────────────┈⊷*
+*┆ 🍀ᴛɪᴛʟᴇ:* *${title}*
+*╰─────────────────┈⊷*`,
+`*📥YT DOWNLOAD MENU*
+╭──────────────◉◈▻
+┊ 1. *ɢᴇᴛ 360𝚙 ᴠɪᴅᴇᴏ*
+┊ 2. *ɢᴇᴛ 230𝚙 ᴠɪᴅᴇᴏ*
+┆ 3. *ɢᴇᴛ 144𝚙 ᴠɪᴅᴇᴏ*
+┊ 4. *ɢᴇᴛ ᴀᴜᴅɪᴏ ꜰɪʟᴇ*
+╰──────────────◉◈▻
+> *\`© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ᴛᴇᴄʜ ᴢᴏɴᴇ\`*
+> *\`© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ\`*
+            `);
+
+        const sentMessage = await socket.sendMessage(sender, {
+            image: {
+                url: ytData?.thumbnail || config.RCD_IMAGE_PATH
+            },
+            caption: captionMessage
+        }, {
+            quoted: botMention
+        });
+
+        const messageID = sentMessage.key.id;
+
+        const handleTikTokSelection = async ({
+            messages: replyMessages
+        }) => {
+            const replyMek = replyMessages[0];
+            if (!replyMek?.message) return;
+
+            const userResponse = replyMek.message.conversation || replyMek.message.extendedTextMessage?.text;
+            const isReplyToSentMsg = replyMek.message.extendedTextMessage?.contextInfo?.stanzaId === messageID;
+
+            if (isReplyToSentMsg && sender === replyMek.key.remoteJid) {
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '⬇️', key: replyMek.key
+                    }
+                });
+                
+                const hd = videos?.[0];
+                const hdurl = hd?.url
+                const sd = videos?.[9];
+                const sdurl = sd?.url
+                const low = videos?.[11];
+                const lowurl = low?.url
+                let mediaMessage;
+                switch (userResponse) {
+                case '1':
+                    mediaMessage = {
+                        video: {
+                            url: hdurl
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ YT VIDEO',
+                            '360p VIDEO DOWNLOADED BY NURO MD',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '2':
+                    mediaMessage = {
+                        video: {
+                            url: sdurl
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ YT VIDEO',
+                            '240p VIDEO DOWNLOADED BY NURO MD',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '3':
+                    mediaMessage = {
+                        video: {
+                            url: lowurl
+                        },
+                        mimetype: 'video/mp4',
+                        caption: formatMessage(
+                            '✅ YT VIDEO',
+                            '144p VIDEO DOWNLOADED BY NURO MD',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                case '4':
+                    mediaMessage = {
+                        audio: {
+                            url: sdurl
+                        },
+                        mimetype: 'audio/mpeg',
+                        caption: formatMessage(
+                            '✅ YT AUDIO',
+                            'AUDIO DOWNLOADED BY NURO MD',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    };
+                    break;
+                default:
+                    await socket.sendMessage(sender, {
+                        image: {
+                            url: config.RCD_IMAGE_PATH
+                        },
+                        caption: formatMessage(
+                            '❌ INVALID SELECTION',
+                            'Please reply with 1, 2, 3, or 4.',
+                            `© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛`
+                        )
+                    });
+                    return;
+                }
+
+                await socket.sendMessage(sender, mediaMessage, {
+                    quoted: replyMek
+                });
+                await socket.sendMessage(sender, {
+                    react: {
+                        text: '✅', key: replyMek.key
+                    }
+                });
+                socket.ev.removeListener('messages.upsert', handleTikTokSelection);
+            }
+        };
+
+        socket.ev.on('messages.upsert', handleTikTokSelection);
+    } catch (err) {
+        console.error("Error in YT downloader:", err);
+        await socket.sendMessage(sender, { 
+            text: '*❌ Internal Error. Please try again later.*',
+            buttons: [
+                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📄 𝐌𝙰𝙸𝙽 𝐌𝙴𝙽𝚄' }, type: 1 }
+            ]
+        });
+    }
+    break;
+	}
+
 case 'setting': {
   await socket.sendMessage(sender, { react: { text: '⚙️', key: msg.key } });
   try {
