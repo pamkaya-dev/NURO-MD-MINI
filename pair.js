@@ -3168,6 +3168,19 @@ END:VCARD`
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
     ];*/
 	  let rows = [
+	{  
+
+        name: "cta_url",  
+
+        buttonParamsJson: JSON.stringify({  
+
+          display_text: "Follow channel",  
+
+          url:,  
+
+          merchant_url:
+
+        }) ,
   {
     title: "JOIN CHANNEL",
     description: "Follow our WhatsApp Channel",
@@ -3175,27 +3188,27 @@ END:VCARD`
   },
   {
     title: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄",
-    description: "Open main commands",
+    description: "DOWNLOAD CMD",
     id: `${config.PREFIX}download`
   },
   {
     title: "🛠️ ᴛᴏᴏʟ ᴍᴇɴᴜ",
-    description: "Fun & games",
+    description: "TOOLS",
     id: `${config.PREFIX}tool`
   },
   {
     title: "🚀 𝙾𝚃𝙷𝙴𝚁 𝙼𝙴𝙽𝚄",
-    description: "Latest news",
+    description: "OTHER TOOL",
     id: `${config.PREFIX}other`
   },
   {
     title: "⚙️ 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝙼𝙴𝙽𝚄",
-    description: "Group tools",
+    description: "SETTINGS",
     id: `${config.PREFIX}settings`
   },
   {
     title: "👑 OWNER",
-    description: "Anime features",
+    description: "OWNER",
     id: `${config.PREFIX}owner`
   }
 ];
@@ -3208,7 +3221,7 @@ END:VCARD`
         }
     ];
 
-   /* let buttons = [
+    let buttons = [
         {
             buttonId: "action",
             buttonText: { displayText: "Sᴇʟᴇᴄᴛ Mᴇɴᴜ" },
@@ -3232,26 +3245,11 @@ END:VCARD`
             type: 1
         }
 		
-    ];*/
-	  /*const buttons = {
-  interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-    nativeFlowMessage: {
-      buttons: [
-        {
-          name: "single_select",
-          buttonParamsJson: JSON.stringify({
-            title: "SELECT MENU",
-            sections: sections
-          })
-        }
-      ]
-    }
-  })
-};*/
+    ];
     const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
     const useLogo = userCfg.logo || MenuImg;
 
-    /*await socket.sendMessage(sender, {
+    await socket.sendMessage(sender, {
         buttons,
         headerType: 1,
         viewOnce: true,
@@ -3267,36 +3265,7 @@ END:VCARD`
                 serverMessageId: 143
             }
         }
-    }, { quoted: shonux });*/
-	  await socket.sendMessage(sender, {
-  image: { url: MenuImg },
-  caption: text,
-  viewOnce: true,
-  interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-    nativeFlowMessage: {
-      buttons: [
-        {
-          name: "single_select",
-          buttonParamsJson: JSON.stringify({
-            title: "SELECT MENU",
-            sections: buttonSections
-          })
-        }
-      ]
-    }
-  }),
-  contextInfo: {
-    mentionedJid: [sender],
-    forwardingScore: 999,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363403935705046@newsletter',
-      newsletterName: 'ɴᴜʀᴏ ᴍᴅ ᴠ1',
-      serverMessageId: 143
-    }
-  }
-}, { quoted: shonux });
-
+    }, { quoted: shonux });
   } catch (err) {
     console.error('menu command error:', err);
     try { await socket.sendMessage(sender, { text: '❌ Failed to show menu.'+err }, { quoted: msg }); } catch(e){}
