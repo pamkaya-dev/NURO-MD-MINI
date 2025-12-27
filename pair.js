@@ -3176,9 +3176,9 @@ END:VCARD`
 
           display_text: "Follow channel",  
 
-          url:,  
+          url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02",  
 
-          merchant_url:
+          merchant_url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"
 
         }) ,
   {
