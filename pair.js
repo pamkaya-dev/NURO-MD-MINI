@@ -454,7 +454,7 @@ async function resize(image, width, height) {
 }
 
 
-// ---------------- command handlers ----------------
+// ---------------- command handlers ---------------
 
 function setupCommandHandlers(socket, number) {
   socket.ev.on('messages.upsert', async ({ messages }) => {
