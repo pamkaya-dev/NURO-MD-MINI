@@ -5,7 +5,7 @@ module.exports = {
     AUTO_LIKE_EMOJI: ['🧩', '🍉', '💜', '🌸', '🪴', '💊', '💫', '🍂', '🌟', '🎋', '😶‍🌫️', '🫀', '🧿', '👀', '🤖', '🚩', '🥰', '🗿', '💜', '💙', '🌝', '🖤', '💚'],
     PREFIX: '.',
     MAX_RETRIES: 3,
-    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/Hs2pfMT0VUKAiwgMfQbRHw',
+    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/DAetqq44hFe6LuKgVCkUj3',
     ADMIN_LIST_PATH: './admin.json',
     IMAGE_PATH: 'https://files.catbox.moe/paap2h.jpg',
     NEWSLETTER_JID: '120363403935705046@newsletter',
