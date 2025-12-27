@@ -2765,14 +2765,13 @@ case 'ping': {
     };
 
     const text = `
-*╭─────────────────┈⊷*
+*╭──────────────┈⊷*
 *│ ⚡ ɴᴜʀᴏ ᴍᴅ ꜱᴘᴇᴇᴅ*
-*╰─────────────────┈⊷*
-*╭─────────────────┈⊷*
-*│ ɴᴜʀᴏ ᴍᴅ ${botName}ᴘɪɴɢ*
-*│ ʟᴀᴛᴇɴᴄʏ:* ${latency}ᴍꜱ
+*╰──────────────┈⊷*
+*╭──────────────┈⊷*
+*│ ᴘɪɴɢ:* ${latency}ᴍꜱ
 *│ ᴛɪᴍᴇ ᴏꜰ ꜱᴇʀᴠᴇʀ:* ${new Date().toLocaleString()}
-*╰─────────────────┈⊷*
+*╰──────────────┈⊷*
 `;
 
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
@@ -2858,7 +2857,7 @@ case 'bots': {
   break;
 }
 case 'song': 
-{try { await socket.sendMessage(sender, { react: { text: "🗒️", key: msg.key } }); } catch(e){}
+{try { await socket.sendMessage(sender, { react: { text: "🎵", key: msg.key } }); } catch(e){}
 
     const yts = require('yt-search');
     const axios = require('axios');
@@ -3231,14 +3230,7 @@ END:VCARD`
             buttonId: `${config.PREFIX}owner`,
             buttonText: { displayText: '👑 OWNER' },
             type: 1
-        },
-			{  
-        name: "cta_url",  
-        buttonParamsJson: JSON.stringify({  
-          display_text: "Follow channel",  
-          url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02",  
-          merchant_url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"  })
-	}	
+        }
     ];
     const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
     const useLogo = userCfg.logo || MenuImg;
@@ -3382,7 +3374,7 @@ END:VCARD`
 *╰──────────────┈⊷*
 *╭─「𝐅𝐀𝐍𝐒𝐘 𝐓𝐎𝐎𝐋」─┈⊷
 *│* ${config.PREFIX}font [text]
-*╰────────────────┈⊷*
+*╰───────────────┈⊷*
 *╭─「𝐃𝐏 𝐓𝐎𝐎𝐋」────┈⊷
 *│*${config.PREFIX}getdp [number]
 *╰───────────────┈⊷
