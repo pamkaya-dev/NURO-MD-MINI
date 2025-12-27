@@ -4078,9 +4078,10 @@ END:VCARD`
             });
         }
 
-        const captionMessage = formatMessage(`
+        const captionMessage = formatMessage(
+`
 *╭─────────────────┈⊷*
-*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚂𝙾𝙽𝙶 𝙳𝙻 🎵*
+*│🎵 𝙽𝚄𝚁𝙾 𝙼𝙳 𝚃𝙸𝙺 𝚃𝙾𝙺 𝙳𝙻 🎵*
 *╰─────────────────┈⊷*`,
 `*📥TIK TOK DOWNLOAD MENU*
 ╭──────────────◉◈▻
