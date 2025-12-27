@@ -3158,50 +3158,56 @@ END:VCARD`
 
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
-
-    /*const buttons = [
-      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}creative`, buttonText: { displayText: "🛠️ 𝚃𝙾𝙾𝙻 𝙼𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}tools`, buttonText: { displayText: "🚀 𝙾𝚃𝙷𝙴𝚁𝙴 𝙼𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝙼𝙴𝙽𝚄" }, type: 1 },
-      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 𝙾𝚆𝙽𝙴𝚁 𝙼𝙴𝙽𝚄" }, type: 1 }
-    ];
-
-    const defaultImg = 'https://files.catbox.moe/p2f8x0.jpg';
-    const useLogo = userCfg.logo || defaultImg;
-
-    // build image payload (url or buffer)
-    let imagePayload;
-    if (String(useLogo).startsWith('http')) imagePayload = { url: useLogo };
-    else {
-      try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: defaultImg }; }
-    }
-
-    await socket.sendMessage(sender, {
-      image: imagePayload,
-      caption: text,
-      footer: "© 𝚂𝚄𝙿𝙿𝙾𝚁𝚃𝙴𝙳 𝙱𝚈 𝙳𝚃𝚉 ♚",
-      buttons,
-      headerType: 4
-    }, { quoted: shonux });*/
 	  
-	  let vpsOptions = [
+	  /*let vpsOptions = [
         { title: "📥 DOWNLOAD MENU", description: "© ɢᴇᴛ ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}download` },
 		  { title: "🛠️ TOOL MENU", description: "© ɢᴇᴛ ᴛᴏᴏʟ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}tool` },
 		  { title: "🚀 OTHER MENU", description: "© ɢᴇᴛ ᴏᴛʜᴇʀᴇ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}other` },
 		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}settings` },
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
-    ];
+    ];*/
+	  let rows = [
+  {
+    title: "JOIN CHANNEL",
+    description: "Follow our WhatsApp Channel",
+    id: "https://whatsapp.com/channel/XXXXXXXXXXXX"
+  },
+  {
+    title: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄",
+    description: "Open main commands",
+    id: `${config.PREFIX}download`
+  },
+  {
+    title: "🛠️ ᴛᴏᴏʟ ᴍᴇɴᴜ",
+    description: "Fun & games",
+    id: `${config.PREFIX}tool`
+  },
+  {
+    title: "🚀 𝙾𝚃𝙷𝙴𝚁 𝙼𝙴𝙽𝚄",
+    description: "Latest news",
+    id: `${config.PREFIX}other`
+  },
+  {
+    title: "⚙️ 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂 𝙼𝙴𝙽𝚄",
+    description: "Group tools",
+    id: `${config.PREFIX}settings`
+  },
+  {
+    title: "👑 OWNER",
+    description: "Anime features",
+    id: `${config.PREFIX}owner`
+  }
+];
 
-    let buttonSections = [
+   let buttonSections = [
         {
             title: "ɴᴜʀᴏ ᴍɪɴɪ ʙᴏᴛ ᴍᴇɴᴜ ᴄᴏᴍᴍᴀɴᴅꜱ",
             highlight_label: "ɴᴜʀᴏ ᴍᴅ ᴠ1 🤍",
-            rows: vpsOptions
+            rows: rows
         }
     ];
 
-    let buttons = [
+   /* let buttons = [
         {
             buttonId: "action",
             buttonText: { displayText: "Sᴇʟᴇᴄᴛ Mᴇɴᴜ" },
@@ -3225,18 +3231,26 @@ END:VCARD`
             type: 1
         }
 		
-    ];
+    ];*/
+	  /*const buttons = {
+  interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+    nativeFlowMessage: {
+      buttons: [
+        {
+          name: "single_select",
+          buttonParamsJson: JSON.stringify({
+            title: "SELECT MENU",
+            sections: sections
+          })
+        }
+      ]
+    }
+  })
+};*/
     const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
     const useLogo = userCfg.logo || MenuImg;
 
-    // build image payload (url or buffer)
-  /*  let imagePayload;
-    if (String(useLogo).startsWith('http')) imagePayload = { url: useLogo };
-    else {
-      try { imagePayload = fs.readFileSync(useLogo); } catch(e){ imagePayload = { url: MenuImg }; }
-    }*/
-
-    await socket.sendMessage(sender, {
+    /*await socket.sendMessage(sender, {
         buttons,
         headerType: 1,
         viewOnce: true,
@@ -3252,7 +3266,35 @@ END:VCARD`
                 serverMessageId: 143
             }
         }
-    }, { quoted: shonux });
+    }, { quoted: shonux });*/
+	  await socket.sendMessage(sender, {
+  image: { url: MenuImg },
+  caption: text,
+  viewOnce: true,
+  interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+    nativeFlowMessage: {
+      buttons: [
+        {
+          name: "single_select",
+          buttonParamsJson: JSON.stringify({
+            title: "SELECT MENU",
+            sections: buttonSections
+          })
+        }
+      ]
+    }
+  }),
+  contextInfo: {
+    mentionedJid: [sender],
+    forwardingScore: 999,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363403935705046@newsletter',
+      newsletterName: 'ɴᴜʀᴏ ᴍᴅ ᴠ1',
+      serverMessageId: 143
+    }
+  }
+}, { quoted: shonux });
 
   } catch (err) {
     console.error('menu command error:', err);
@@ -3518,7 +3560,7 @@ case 'getdp': {
         try {
             ppUrl = await socket.profilePictureUrl(jid, "image");
         } catch {
-            ppUrl = "https://files.catbox.moe/ditu9f.jpeg"; // default dp
+            ppUrl = "https://files.catbox.moe/paap2h.jpg"; // default dp
         }
 
         // 🔹 BotName meta mention
