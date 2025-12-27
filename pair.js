@@ -3168,20 +3168,7 @@ END:VCARD`
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
     ];*/
 	  let rows = [
-	{  
 
-        name: "cta_url",  
-
-        buttonParamsJson: JSON.stringify({  
-
-          display_text: "Follow channel",  
-
-          url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02",  
-
-          merchant_url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"
-
-        })
-	},
   {
     title: "JOIN CHANNEL",
     description: "Follow our WhatsApp Channel",
@@ -3244,8 +3231,14 @@ END:VCARD`
             buttonId: `${config.PREFIX}owner`,
             buttonText: { displayText: '👑 OWNER' },
             type: 1
-        }
-		
+        },
+			{  
+        name: "cta_url",  
+        buttonParamsJson: JSON.stringify({  
+          display_text: "Follow channel",  
+          url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02",  
+          merchant_url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"  })
+	}	
     ];
     const MenuImg = 'https://files.catbox.moe/paap2h.jpg';
     const useLogo = userCfg.logo || MenuImg;
