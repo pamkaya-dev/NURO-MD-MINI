@@ -22,6 +22,7 @@ const {
   Browsers,
   jidNormalizedUser,
   downloadContentFromMessage,
+  proto,
   DisconnectReason
 } = require('baileys');
 // ---------------- CONFIG ----------------
