@@ -3180,7 +3180,8 @@ END:VCARD`
 
           merchant_url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"
 
-        }) ,
+        })
+	},
   {
     title: "JOIN CHANNEL",
     description: "Follow our WhatsApp Channel",
