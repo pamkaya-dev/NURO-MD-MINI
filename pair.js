@@ -483,13 +483,40 @@ function setupCommandHandlers(socket, number) {
       : (type === 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage?.selectedButtonId
       : (type === 'listResponseMessage') ? msg.message.listResponseMessage?.singleSelectReply?.selectedRowId
       : (type === 'viewOnceMessage') ? (msg.message.viewOnceMessage?.message?.imageMessage?.caption || '') : '';*/
-	  const body = (type === 'conversation') ? mek.message.conversation 
-		  : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text 
-		  :(type == 'interactiveResponseMessage' ) ? mek.message.interactiveResponseMessage  && mek.message.interactiveResponseMessage.nativeFlowResponseMessage && JSON.parse(mek.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson) && JSON.parse(mek.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson).id 
-		  :(type == 'templateButtonReplyMessage' )? mek.message.templateButtonReplyMessage && mek.message.templateButtonReplyMessage.selectedId  
-		  : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption 
-		  : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : msg.msg?.text || msg.msg?.conversation || msg.msg?.caption || msg.message?.conversation || msg.msg?.selectedButtonId || msg.msg?.singleSelectReply?.selectedRowId || msg.msg?.selectedId || msg.msg?.contentText || msg.msg?.selectedDisplayText || msg.msg?.title || msg.msg?.name || '';
-
+	  const body =
+(type === 'conversation') ? msg.message?.conversation
+: (type === 'extendedTextMessage') ? msg.message?.extendedTextMessage?.text
+: (type === 'imageMessage') ? msg.message?.imageMessage?.caption
+: (type === 'videoMessage') ? msg.message?.videoMessage?.caption
+: (type === 'viewOnceMessage') ?
+   msg.message?.viewOnceMessage?.message?.imageMessage?.caption ||
+   msg.message?.viewOnceMessage?.message?.videoMessage?.caption
+: (type === 'buttonsResponseMessage') ?
+   msg.message?.buttonsResponseMessage?.selectedButtonId
+: (type === 'listResponseMessage') ?
+   msg.message?.listResponseMessage?.singleSelectReply?.selectedRowId
+: (type === 'templateButtonReplyMessage') ?
+   msg.message?.templateButtonReplyMessage?.selectedId
+: (type === 'interactiveResponseMessage') ? (
+   msg.message?.interactiveResponseMessage?.nativeFlowResponseMessage?.paramsJson
+     ? JSON.parse(
+         msg.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson
+       )?.id
+     : undefined
+ )
+// 🔹 Final fallback (ANY message type catch)
+: msg.msg?.text
+|| msg.msg?.conversation
+|| msg.msg?.caption
+|| msg.message?.conversation
+|| msg.msg?.selectedButtonId
+|| msg.msg?.singleSelectReply?.selectedRowId
+|| msg.msg?.selectedId
+|| msg.msg?.contentText
+|| msg.msg?.selectedDisplayText
+|| msg.msg?.title
+|| msg.msg?.name
+|| '';
     if (!body || typeof body !== 'string') return;
 
     const prefix = config.PREFIX;
