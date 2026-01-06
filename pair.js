@@ -54,7 +54,7 @@ const config = {
 // ---------------- MONGO SETUP ----------------
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://nuro-md:nuro1221@cluster0.geuia5e.mongodb.net//';
-const MONGO_DB = process.env.MONGO_DB || 'NURO_DATA';
+const MONGO_DB = process.env.MONGO_DB || 'NURO_DATAS';
 
 let mongoClient, mongoDB;
 let sessionsCol, numbersCol, adminsCol, newsletterCol, configsCol, newsletterReactsCol;
