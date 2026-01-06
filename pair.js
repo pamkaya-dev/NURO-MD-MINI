@@ -3200,12 +3200,6 @@ END:VCARD`
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
     ];*/
 	  let rows =[
-   {
-    name: "cta_url",
-    buttonParamsJson: JSON.stringify({
-    display_text: "JOIN CHANNEL",
-    url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"})
-  },
   {
     title: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄",
     description: "DOWNLOAD CMD",
@@ -3242,6 +3236,12 @@ END:VCARD`
     ];
 
     let buttons = [
+		{
+    name: "cta_url",
+    buttonParamsJson: JSON.stringify({
+    display_text: "JOIN CHANNEL",
+    url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"})
+  },
         {
             buttonId: "action",
             buttonText: { displayText: "Sᴇʟᴇᴄᴛ Mᴇɴᴜ" },
@@ -3332,20 +3332,16 @@ END:VCARD`
 *╭────────────────●►*   
 *│📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔*
 *╰────────────────●►*
-*╭─「 𝐌𝐔𝐒𝐈𝐂 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷*
+*╭──────────────┈⊷*
 *│* ${config.PREFIX}song [query]
 *│* ${config.PREFIX}csong [jid] [query]
 *│* ${config.PREFIX}ringtone [name]
-*╰─────────────────┈⊷*
-*╭─「 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐂𝐌𝐃 」─┈⊷
 *│* ${config.PREFIX}tiktok [url]
 *│* ${config.PREFIX}video [query]
 *│* ${config.PREFIX}xvideo [query]
 *│* ${config.PREFIX}xnxx [query]
 *│* ${config.PREFIX}fb [url]
 *│* ${config.PREFIX}ig [url]
-*╰─────────────────┈⊷*
-*╭─「 𝐀𝐏𝐊 & 𝐅𝐈𝐋𝐄 𝐂𝐌𝐃 」──┈⊷*
 *│* ${config.PREFIX}apk [app id]
 *│* ${config.PREFIX}apksearch [app name]
 *│* ${config.PREFIX}mediafire [url]
@@ -3470,22 +3466,16 @@ END:VCARD`
 *│🛠️ OTHE MENU*
 *╰─────────────────●►*
 
-*╭─「𝐈𝐍𝐅𝐎 𝐂𝐌𝐃」─┈⊷*
+*╭──────────────┈⊷*
 *│* ${config.PREFIX}jid
 *│* ${config.PREFIX}cid [channel-link]
 *│* ${config.PREFIX}system
-*╰───────────────────┈⊷
-*╭─「 𝐆𝐑𝐎𝐔𝐏 𝐂𝐌𝐃 」─┈⊷*
 *│* ${config.PREFIX}tagall [message]
 *│* ${config.PREFIX}online
-*╰───────────────────┈⊷
-*╭─「𝐍𝐄𝐖𝐒 𝐂𝐌𝐃」────┈⊷*
 *│* ${config.PREFIX}adanews
 *│* ${config.PREFIX}sirasanews
 *│* ${config.PREFIX}lankadeepanews
 *│* ${config.PREFIX}gagananews
-*╰───────────────────┈⊷
-*╭─「𝐔𝐒𝐄𝐑 𝐂𝐌𝐃」────┈⊷*
 *│* ${config.PREFIX}block [number]
 *│* ${config.PREFIX}unblock [number]
 *│* ${config.PREFIX}prefix
@@ -3496,12 +3486,8 @@ END:VCARD`
 *│* ${config.PREFIX}arm
 *│* ${config.PREFIX}rstatus
 *│* ${config.PREFIX}botpresence
-*╰───────────────────┈⊷
-*╭─「𝐒𝐄𝐀𝐑𝐂𝐇 𝐂𝐌𝐃」────┈⊷*
 *│* ${config.PREFIX}img [query]
 *│* ${config.PREFIX}google [query]
-*╰───────────────────┈⊷
-*╭─「𝐂𝐇𝐄𝐂𝐊 𝐂𝐌𝐃」─┈⊷*
 *│* ${config.PREFIX}ping
 *│* ${config.PREFIX}alive
 *╰──────────────┈⊷
