@@ -3248,12 +3248,6 @@ END:VCARD`
                 })
             }
         },
-		{
-    name: "cta_url",
-    buttonParamsJson: JSON.stringify({
-    display_text: "JOIN CHANNEL",
-    url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"})
-  },
         {
             buttonId: `${config.PREFIX}ping`,
             buttonText: { displayText: '⚡ PING' },
