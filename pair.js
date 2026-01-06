@@ -3199,12 +3199,12 @@ END:VCARD`
 		  { title: "⚙️ SETTINGS MENU", description: "© ɢᴇᴛ ꜱᴇᴛᴛɪɴɢꜱ ᴍᴇɴᴜ", buttonId: `${config.PREFIX}settings` },
         { title: "👑 OWNER", description: "© ɢᴇᴛ ᴏᴡɴᴇʀ", buttonId: `${config.PREFIX}owner` }
     ];*/
-	  let rows = [
-
-  {
-    title: "JOIN CHANNEL",
-    description: "Follow our WhatsApp Channel",
-    id: "https://whatsapp.com/channel/XXXXXXXXXXXX"
+	  let rows =[
+   {
+    name: "cta_url",
+    buttonParamsJson: JSON.stringify({
+    display_text: "JOIN CHANNEL",
+    url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"})
   },
   {
     title: "📥 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙼𝙴𝙽𝚄",
@@ -3254,6 +3254,12 @@ END:VCARD`
                 })
             }
         },
+		{
+    name: "cta_url",
+    buttonParamsJson: JSON.stringify({
+    display_text: "JOIN CHANNEL",
+    url: "https://whatsapp.com/channel/0029Vb6d1x73bbVBh3ibyx02"})
+  },
         {
             buttonId: `${config.PREFIX}ping`,
             buttonText: { displayText: '⚡ PING' },
@@ -3400,19 +3406,13 @@ END:VCARD`
 *╭─────────────●►*  
 *│🛠️ 𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔
 *╰─────────────●►*
-*╭─「𝐀𝐈 𝐓𝐎𝐎𝐋」────┈⊷*
-*│* ${config.PREFIX}ai [message]
-*│* ${config.PREFIX}aiimg [prompt]
-*│* ${config.PREFIX}aiimg2 [prompt]
-*╰──────────────┈⊷*
-*╭─「𝐅𝐀𝐍𝐒𝐘 𝐓𝐎𝐎𝐋」─┈⊷
-*│* ${config.PREFIX}font [text]
-*╰───────────────┈⊷*
-*╭─「𝐃𝐏 𝐓𝐎𝐎𝐋」────┈⊷
-*│*${config.PREFIX}getdp [number]
-*╰───────────────┈⊷
-*╭─「𝐌𝐄𝐃𝐄𝐀 𝐓𝐎𝐎𝐋」─┈⊷
-*│*${config.PREFIX}save (reply to status) 
+*╭──────────────┈⊷*
+*│*🤖${config.PREFIX}ai [message]
+*│*🌆${config.PREFIX}aiimg [prompt]
+*│*🌆${config.PREFIX}aiimg2 [prompt]
+*│*❖${config.PREFIX}font [text]
+*│*🏞️${config.PREFIX}getdp [number]
+*│*📥${config.PREFIX}save (reply to status) 
 *╰──────────────┈⊷*
 > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*
 `.trim();
@@ -3673,8 +3673,7 @@ END:VCARD`
 `.trim();
 
     const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" }, type: 1 },
-      { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ SETTINGS" }, type: 1 }
+      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📜 MENU" }, type: 1 }
     ];
 
     await socket.sendMessage(sender, {
