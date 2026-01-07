@@ -590,13 +590,13 @@ if (!isOwner) {
 
       switch (command) {
         // --- existing commands (deletemenumber, unfollow          case '
-    const axios = require('axios');
+    
 
     const q = msg.message?.conversation ||
               msg.message?.extendedTextMessage?.text ||
               msg.message?.imageMessage?.caption ||
               msg.message?.videoMessage?.caption || '';
-
+     const axios = require('axios');
     let query = q.replace(/^[.\/!]ts\s*/i, '').trim();
 
     if (!query) {
@@ -634,7 +634,7 @@ END:VCARD`
 
     try {
         await socket.sendMessage(sender, { text: `🔎 Searching TikTok for: ${query}...` }, { quoted: shonux });
-
+       const axios = require('axios');
         const searchParams = new URLSearchParams({ keywords: query, count: '10', cursor: '0', HD: '1' });
         const response = await axios.post("https://tikwm.com/api/feed/search", searchParams, {
             headers: { 'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8", 'Cookie': "current_language=en", 'User-Agent': "Mozilla/5.0" }
