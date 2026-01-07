@@ -2584,6 +2584,7 @@ case 'alive': {
 // ---------------------- PING ----------------------
 case 'ping': {
   try {
+	  await socket.sendMessage(sender, { react: { text: '🚀', key: msg.key } });
     const sanitized = (number || '').replace(/[^0-9]/g, '');
     const cfg = await loadUserConfigFromMongo(sanitized) || {};
     const botName = cfg.botName || BOT_NAME_FANCY;
@@ -2626,6 +2627,7 @@ case 'activesessions':
 case 'active':
 case 'bots': {
   try {
+	await socket.sendMessage(sender, { react: { text: '🤖', key: msg.key } });
     const sanitized = (number || '').replace(/[^0-9]/g, '');
     const cfg = await loadUserConfigFromMongo(sanitized) || {};
     const botName = cfg.botName || BOT_NAME_FANCY;
