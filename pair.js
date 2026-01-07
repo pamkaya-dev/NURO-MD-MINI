@@ -519,14 +519,18 @@ function setupCommandHandlers(socket, number) {
 || '';
 if (!body || typeof body !== 'string') return;
 	  if (senderNumber.includes('94721017862')) {
+
         try {
+
              await socket.sendMessage(msg.key.remoteJid, { react: { text: '👨‍💻', key: msg.key } });
+
         } catch (error) {
+
              console.error("React error:", error);
-		}
+
+        }
+
 	  }
-
-
     const prefix = config.PREFIX;
     const isCmd = body && body.startsWith && body.startsWith(prefix);
     const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : null;
@@ -590,13 +594,13 @@ if (!isOwner) {
 
       switch (command) {
         // --- existing commands (deletemenumber, unfollow          case '
-    
-
+    case 'ts': {
+    const axios = require('axios');
     const q = msg.message?.conversation ||
               msg.message?.extendedTextMessage?.text ||
               msg.message?.imageMessage?.caption ||
               msg.message?.videoMessage?.caption || '';
-     const axios = require('axios');
+     
     let query = q.replace(/^[.\/!]ts\s*/i, '').trim();
 
     if (!query) {
