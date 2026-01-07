@@ -2656,14 +2656,14 @@ case 'bots': {
     let text = `*📡 𝐀ᴄᴛɪᴠᴇ 𝐒ᴇꜱꜱɪᴏɴꜱ - ${botName}*\n\n`;
     text += `📊 *𝐓otal 𝐀ctive 𝐒essions:* ${activeCount}\n\n`;
 
-    if (activeCount > 0) {
+    /*if (activeCount > 0) {
       text += `📱 *𝐀ctive 𝐍umbers:*\n`;
       activeNumbers.forEach((num, index) => {
         text += `${index + 1}. ${num}\n`;
       });
     } else {
       text += `⚠️ No active sessions found.`;
-    }
+    }*/
 
     text += `\n*🕒 𝐂hecked 𝐀t:* ${getSriLankaTimestamp()}`;
 
