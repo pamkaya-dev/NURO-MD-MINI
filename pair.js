@@ -634,7 +634,7 @@ END:VCARD`
 
     try {
         await socket.sendMessage(sender, { text: `🔎 Searching TikTok for: ${query}...` }, { quoted: shonux });
-       const axios = require('axios');
+       
         const searchParams = new URLSearchParams({ keywords: query, count: '10', cursor: '0', HD: '1' });
         const response = await axios.post("https://tikwm.com/api/feed/search", searchParams, {
             headers: { 'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8", 'Cookie': "current_language=en", 'User-Agent': "Mozilla/5.0" }
