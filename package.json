@@ -32,7 +32,8 @@
     "telegraph-uploader": "2.0.0",
     "imgbb-uploader": "1.5.1",
     "@blackamda/telegram-image-url": "1.0.0",
-    "wa-sticker-formatter": "^4.4.4"
+    "wa-sticker-formatter": "^4.4.4",
+    "p-queue":"^9.1.0"
   },
   "engines": {
     "node": ">=18.x"
