@@ -2973,7 +2973,7 @@ END:VCARD`
     const greetings = hour < 12 ? 'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ..🌅' :
                       hour < 17 ? 'ɢᴏᴏᴅ ᴀꜰᴛᴇʀɴᴏᴏɴ..🌞' :
                       hour < 20 ? 'ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ..🌆' : 'ɢᴏᴏᴅ ɴɪɢʜᴛ..🌙';
-	const nuroweb = 'https://nuro-md-mini-bot.onrender.com/';
+	const nuroweb = 'https://nuro-md-base-web.vercel.app/';
     const text = `
 *╭──〔 NURO-MD 〕─┈⊷*
 *│👋 𝙷𝙴𝙻𝙻𝙾 𝚄𝚂𝙴𝚁**
