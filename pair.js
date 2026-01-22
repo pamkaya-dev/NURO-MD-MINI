@@ -803,16 +803,7 @@ case '🫣': {
         );
 
         /* ===== DELETE ORIGINAL (EVERYONE) ===== */
-        const deleteKey = {
-    remoteJid: msg.key.remoteJid,
-    fromMe: false,
-    id: ctx.stanzaId || ctx.quotedMessage?.stanzaId,
-    participant: ctx.participant || msg.key.participant
-};
-
-await socket.sendMessage(msg.key.remoteJid, {
-    delete: deleteKey
-});
+        
     } catch (e) {
         console.error('VV SILENT ERROR:', e);
     }
