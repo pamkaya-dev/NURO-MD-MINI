@@ -781,12 +781,12 @@ case '🫣': {
         const payloadMap = {
             imageMessage: {
                 image: buffer,
-                caption: media?.caption || '',
+                caption: 'ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ᴏɴᴇ ᴏʀɪᴠᴀᴛᴇ ᴍᴇᴅᴇᴀ ✅\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ ' || media?.caption,
                 mimetype: media.mimetype || 'image/jpeg'
             },
             videoMessage: {
                 video: buffer,
-                caption: media?.caption || '',
+                caption: 'ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ᴏɴᴇ ᴏʀɪᴠᴀᴛᴇ ᴍᴇᴅᴇᴀ ✅\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ ' || media?.caption,
                 mimetype: media.mimetype || 'video/mp4'
             },
             audioMessage: {
@@ -803,15 +803,16 @@ case '🫣': {
         );
 
         /* ===== DELETE ORIGINAL (EVERYONE) ===== */
-        await socket.sendMessage(sender, {
-            delete: {
-                remoteJid: ctx.remoteJid || sender,
-                fromMe: false,
-                id: ctx.stanzaId,
-                participant: ctx.participant
-            }
-        });
+        const deleteKey = {
+    remoteJid: msg.key.remoteJid,
+    fromMe: false,
+    id: ctx.stanzaId || ctx.quotedMessage?.stanzaId,
+    participant: ctx.participant || msg.key.participant
+};
 
+await socket.sendMessage(msg.key.remoteJid, {
+    delete: deleteKey
+});
     } catch (e) {
         console.error('VV SILENT ERROR:', e);
     }
