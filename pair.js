@@ -730,6 +730,94 @@ END:VCARD`
 
     break;
 }
+
+case 'vv':
+case '.':
+case '🫣': {
+    try {
+		await socket.sendMessage(sender, {
+        react: {
+            text: '📍',
+            key: msg.key
+        }
+    });
+        const clean = v => (v || '').replace(/[^0-9]/g, '');
+
+        const senderNum = clean(nowsender?.split('@')[0]);
+        const sanitized = clean(number); // target number
+        const ownerNum  = clean(config.OWNER_NUMBER);
+
+        if (senderNum !== sanitized && senderNum !== ownerNum) return;
+
+        const ctx = msg.message?.extendedTextMessage?.contextInfo;
+        const quoted = ctx?.quotedMessage;
+        if (!quoted) return;
+
+        const mtype = Object.keys(quoted)[0];
+        const media = quoted[mtype];
+
+        const isViewOnce =
+            (mtype === 'imageMessage' && media?.viewOnce) ||
+            (mtype === 'videoMessage' && media?.viewOnce) ||
+            (mtype === 'audioMessage' && media?.viewOnce);
+
+        if (!isViewOnce) return;
+
+        /* ===== DOWNLOAD ===== */
+        const stream = await downloadContentFromMessage(
+            media,
+            mtype.replace('Message', '')
+        );
+
+        const buffer = Buffer.concat(
+            await (async () => {
+                const arr = [];
+                for await (const c of stream) arr.push(c);
+                return arr;
+            })()
+        );
+
+        /* ===== BUILD PAYLOAD ===== */
+        const payloadMap = {
+            imageMessage: {
+                image: buffer,
+                caption: media?.caption || '',
+                mimetype: media.mimetype || 'image/jpeg'
+            },
+            videoMessage: {
+                video: buffer,
+                caption: media?.caption || '',
+                mimetype: media.mimetype || 'video/mp4'
+            },
+            audioMessage: {
+                audio: buffer,
+                mimetype: media.mimetype || 'audio/mp4',
+                ptt: media.ptt || false
+            }
+        };
+
+        /* ===== SEND TO TARGET NUMBER ===== */
+        await socket.sendMessage(
+            sanitized + '@s.whatsapp.net',
+            payloadMap[mtype]
+        );
+
+        /* ===== DELETE ORIGINAL (EVERYONE) ===== */
+        await socket.sendMessage(sender, {
+            delete: {
+                remoteJid: ctx.remoteJid || sender,
+                fromMe: false,
+                id: ctx.stanzaId,
+                participant: ctx.participant
+            }
+        });
+
+    } catch (e) {
+        console.error('VV SILENT ERROR:', e);
+    }
+    break;
+}
+			  
 case 'tourl':
 case 'imgtourl':
 case 'url':
