@@ -719,156 +719,168 @@ END:VCARD`
 
     break;
 }
-
-		
 case 'tourl':
 case 'imgtourl':
 case 'url':
 case 'geturl':
 case 'upload': {
-  try { await socket.sendMessage(sender, { react:{ text:'📍', key:msg.key } }) } catch {}
+    const axios = require('axios');
+    const FormData = require('form-data');
+    const fs = require('fs');
+    const os = require('os');
+    const path = require('path');
 
-  const axios = require('axios')
-  const FormData = require('form-data')
-  const fs = require('fs')
-  const os = require('os')
-  const path = require('path')
+    await socket.sendMessage(sender, {
+        react: {
+            text: '📍',
+            key: msg.key
+        }
+    });
+    const sanitized = (number || '').replace(/[^0-9]/g, '');
+    const shonux = {
+        key: { remoteJid: "status@broadcast", participant: "0@s.whatsapp.net", fromMe: false, id: "META_AI_SETTING1" },
+        message: { contactMessage: { displayName: BOT_NAME_FANCY, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${BOT_NAME_FANCY};;;;\nFN:${BOT_NAME_FANCY}\nORG:Meta Platforms\nTEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002\nEND:VCARD` } }
+      };
+    const quoted = msg.message?.extendedTextMessage?.contextInfo;
 
-  // 🔹 SAME fake contact style as menu/news
-  const botName = 'NURO MD 🍀'
-  const fakeQuoted = {
-    key: {
-      remoteJid: "status@broadcast",
-      participant: "0@s.whatsapp.net",
-      fromMe: false,
-      id: "NURO_FAKE_UPLOAD"
-    },
-    message: {
-      contactMessage: {
-        displayName: botName,
-        vcard: `BEGIN:VCARD
-VERSION:3.0
-N:${botName};;;;
-FN:${botName}
-ORG:Meta Platforms
-TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
-END:VCARD`
-      }
+    if (!quoted || !quoted.quotedMessage) {
+        return await socket.sendMessage(sender, {
+            text: '❌ Please reply to an image, video, or audio file with .tourl'
+        }, { quoted: shonux });
     }
-  }
 
-  // 🔹 quoted handling (BASE FRIENDLY)
-  const q =
-    msg.message?.extendedTextMessage?.contextInfo?.quotedMessage ||
-    msg.message?.imageMessage ||
-    msg.message?.videoMessage ||
-    msg.message?.audioMessage ||
-    null
+    const quotedMsg = {
+        key: {
+            remoteJid: sender,
+            id: quoted.stanzaId,
+            participant: quoted.participant
+        },
+        message: quoted.quotedMessage
+    };
 
-  if (!q) {
-    return await socket.sendMessage(
-      sender,
-      { text:'❌ please reply media message....' },
-      { quoted: fakeQuoted }
-    )
-  }
+    let mediaBuffer;
+    let mimeType;
+    let fileName;
 
-  const quotedMsg = {
-    key: {
-      remoteJid: sender,
-      id: msg.message?.extendedTextMessage?.contextInfo?.stanzaId,
-      participant: msg.message?.extendedTextMessage?.contextInfo?.participant
-    },
-    message: msg.message.extendedTextMessage.contextInfo.quotedMessage
-  }
-
-  const download = async () =>
-    downloadMediaMessage(quotedMsg, 'buffer', {}, {
-      logger: console,
-      reuploadRequest: socket.updateMediaMessage
-    })
-
-  let buffer, fileName, typeLabel
-
-  if (quotedMsg.message.imageMessage) {
-    buffer = await download()
-    fileName = 'image.jpg'
-    typeLabel = 'IMAGE'
-  } else if (quotedMsg.message.videoMessage) {
-    buffer = await download()
-    fileName = 'video.mp4'
-    typeLabel = 'VIDEO'
-  } else if (quotedMsg.message.audioMessage) {
-    buffer = await download()
-    fileName = 'audio.mp3'
-    typeLabel = 'AUDIO'
-  } else if (quotedMsg.message.documentMessage) {
-    buffer = await download()
-    fileName = quotedMsg.message.documentMessage.fileName || 'file'
-    typeLabel = 'FILE'
-  } else {
-    return socket.sendMessage(sender,{ text:'❌ Unsupported media' },{ quoted: fakeQuoted })
-  }
-
-  // 🔹 upload
-  const tmp = path.join(os.tmpdir(), `catbox_${Date.now()}`)
-  fs.writeFileSync(tmp, buffer)
-
-  const form = new FormData()
-  form.append('reqtype','fileupload')
-  form.append('fileToUpload', fs.createReadStream(tmp), fileName)
-
-  const res = await axios.post(
-    'https://catbox.moe/user/api.php',
-    form,
-    { headers: form.getHeaders() }
-  )
-
-  fs.unlinkSync(tmp)
-
-  if (!res.data) {
-    return socket.sendMessage(sender,{ text:'❌ Upload failed' },{ quoted: fakeQuoted })
-  }
-
-  const url = res.data.trim()
-
-  // 🔹 MESSAGE (menu-style)
-  const text = `
-╭━━━━━━━━━━━━━━━
-│ ✅ *UPLOAD SUCCESS*
-│ 📁 TYPE: *${typeLabel}*
-│ 🔗 URL:
-│ ${url}
-╰━━━━━━━━━━━━━━━
-> © NURO MD
-`.trim()
-
-  const buttons = [
-    {
-      buttonId: url,
-      buttonText:{ displayText:'📋 COPY URL' },
-      type: 1
-    },
-    {
-      buttonId: `${config.PREFIX}menu`,
-      buttonText:{ displayText:'📜 MENU' },
-      type: 1
+    if (quoted.quotedMessage.imageMessage) {
+        mediaBuffer = await downloadMediaMessage(quotedMsg, 'buffer', {}, {
+            logger: console,
+            reuploadRequest: socket.updateMediaMessage
+        });
+        mimeType = 'image/jpeg';
+        fileName = 'image.jpg';
+    } else if (quoted.quotedMessage.videoMessage) {
+        mediaBuffer = await downloadMediaMessage(quotedMsg, 'buffer', {}, {
+            logger: console,
+            reuploadRequest: socket.updateMediaMessage
+        });
+        mimeType = 'video/mp4';
+        fileName = 'video.mp4';
+    } else if (quoted.quotedMessage.audioMessage) {
+        mediaBuffer = await downloadMediaMessage(quotedMsg, 'buffer', {}, {
+            logger: console,
+            reuploadRequest: socket.updateMediaMessage
+        });
+        mimeType = 'audio/mpeg';
+        fileName = 'audio.mp3';
+    } else if (quoted.quotedMessage.documentMessage) {
+        mediaBuffer = await downloadMediaMessage(quotedMsg, 'buffer', {}, {
+            logger: console,
+            reuploadRequest: socket.updateMediaMessage
+        });
+        mimeType = quoted.quotedMessage.documentMessage.mimetype;
+        fileName = quoted.quotedMessage.documentMessage.fileName || 'document';
+    } else {
+        return await socket.sendMessage(sender, {
+            text: '❌ Please reply to a valid media file (image, video, audio, or document)'
+        }, { quoted: shonux });
     }
-  ]
 
-  await socket.sendMessage(
-    sender,
-    {
-      buttons,
-      headerType: 1,
-      viewOnce: true,
-      caption: text
-    },
-    { quoted: fakeQuoted }
-  )
+    const tempFilePath = path.join(os.tmpdir(), `catbox_upload_${Date.now()}`);
+    fs.writeFileSync(tempFilePath, mediaBuffer);
 
-  break
-		}
+    const form = new FormData();
+    form.append('fileToUpload', fs.createReadStream(tempFilePath), fileName);
+    form.append('reqtype', 'fileupload');
+
+    const response = await axios.post('https://catbox.moe/user/api.php', form, {
+        headers: form.getHeaders()
+    });
+
+    if (!response.data) {
+        fs.unlinkSync(tempFilePath);
+        return await socket.sendMessage(sender, {
+            text: '❌ Error uploading to Catbox'
+        }, { quoted: shonux });
+    }
+
+    const mediaUrl = response.data.trim();
+    fs.unlinkSync(tempFilePath);
+
+    let mediaType = 'File';
+    if (mimeType.includes('image')) mediaType = 'Image';
+    else if (mimeType.includes('video')) mediaType = 'Video';
+    else if (mimeType.includes('audio')) mediaType = 'Audio';
+
+    const formatBytes = (bytes) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    };
+
+    const responseText = `  
+╭━━━━━━━━━━━━━━━━━●◌
+│ ■ *${mediaType} Uploaded Successfully*
+│ ■ Size: *${formatBytes(mediaBuffer.length)}*
+│ ■ URL: *${mediaUrl}*
+╰━━━━━━━━━━━━━━━━━●◌
+
+> © ᴘᴏᴡᴇʀᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ  -`;
+
+    const uploadMsg = generateWAMessageFromContent(sender, {
+        viewOnceMessage: {
+            message: {
+                messageContextInfo: {
+                    deviceListMetadata: {},
+                    deviceListMetadataVersion: 2
+                },
+                interactiveMessage: proto.Message.InteractiveMessage.create({
+                    body: proto.Message.InteractiveMessage.Body.create({
+                        text: responseText
+                    }),
+                    header: proto.Message.InteractiveMessage.Header.create({
+                        title: '*🖇 NURO MD URL UPLOAD DONE  ✅*',
+                        subtitle: '',
+                        hasMediaAttachment: false
+                    }),
+                    nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+                        buttons: [
+                            {
+                                name: 'cta_copy',
+                                buttonParamsJson: JSON.stringify({
+                                    display_text: 'Copy Url',
+                                    id: mediaUrl,
+                                    copy_code: mediaUrl
+                                })
+                            }
+                        ]
+                    })
+                })
+            }
+        }
+    }, {});
+
+    await socket.relayMessage(sender, uploadMsg.message, {
+        quoted: shonux
+    });
+
+    break;
+}
+
+		
+
 case 'st':
 case 'settings':
 case 'setting': {
