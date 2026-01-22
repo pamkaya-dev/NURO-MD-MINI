@@ -842,11 +842,11 @@ case 'upload': {
     };
 
     const responseText = `  
-╭━━━━━━━━━━━━━━━━━●◌
-│ ■ *${mediaType} Uploaded Successfully*
-│ ■ Size: *${formatBytes(mediaBuffer.length)}*
-│ ■ URL: *${mediaUrl}*
-╰━━━━━━━━━━━━━━━━━●◌
+*╭───────────┈⊷**
+*│* ■ *${mediaType} Uploaded Successfully*
+*│* ■ Size: *${formatBytes(mediaBuffer.length)}*
+*│* ■ URL: *${mediaUrl}*
+*╰───────────┈⊷**
 
 > © ᴘᴏᴡᴇʀᴅ ʙʏ ɴᴜʀᴏ ᴍᴅ  -`;
 
@@ -862,7 +862,7 @@ case 'upload': {
                         text: responseText
                     }),
                     header: proto.Message.InteractiveMessage.Header.create({
-                        title: '*🖇 NURO MD URL UPLOAD DONE  ✅*',
+                        title: '*⛓️ NURO IS GOT THE URL ✅*',
                         subtitle: '',
                         hasMediaAttachment: false
                     }),
