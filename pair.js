@@ -741,7 +741,7 @@ case 'upload': {
         key: { remoteJid: "status@broadcast", participant: "0@s.whatsapp.net", fromMe: false, id: "META_AI_SETTING1" },
         message: { contactMessage: { displayName: BOT_NAME_FANCY, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${BOT_NAME_FANCY};;;;\nFN:${BOT_NAME_FANCY}\nORG:Meta Platforms\nTEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002\nEND:VCARD` } }
       };
-    const quoted = msg.message?.extendedTextMessage?.contextInfo;
+    
 
     if (!quoted || !quoted.quotedMessage) {
         return await socket.sendMessage(sender, {
