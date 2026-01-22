@@ -15,15 +15,26 @@ const { MongoClient } = require('mongodb');
 
 const {
   default: makeWASocket,
-  useMultiFileAuthState,
-  delay,
-  getContentType,
-  makeCacheableSignalKeyStore,
-  Browsers,
-  jidNormalizedUser,
-  downloadContentFromMessage,
-  proto,
-  DisconnectReason
+    makeCacheableSignalKeyStore,
+    useMultiFileAuthState,
+    DisconnectReason,
+    downloadMediaMessage,
+    generateForwardMessageContent,
+    prepareWAMessageMedia,
+    fetchLatestBaileysVersion, 
+    generateWAMessageFromContent,
+    generateMessageID,
+    downloadContentFromMessage,
+    extractMessageContent, 
+    jidDecode,
+    MessageRetryMap,
+    jidNormalizedUser, 
+    proto,
+    getContentType,
+    areJidsSameUser,
+    generateWAMessage, 
+    delay, 
+    Browsers
 } = require('baileys');
 // ---------------- CONFIG ----------------
 
@@ -748,7 +759,7 @@ case 'upload': {
             text: '❌ Please reply to an image, video, or audio file with .tourl'
         }, { quoted: shonux });
     }
-
+const quoted = msg.message?.extendedTextMessage?.contextInfo;
     const quotedMsg = {
         key: {
             remoteJid: sender,
