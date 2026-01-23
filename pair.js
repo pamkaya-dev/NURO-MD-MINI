@@ -3800,6 +3800,11 @@ END:VCARD`
     description: "GAGANA NEWS",
     id: `${config.PREFIX}gagananews`
   },
+ {
+    title: "ʜɪʀᴜ",
+    description: "HIRU NEWS",
+    id: `${config.PREFIX}hirunews`
+  },
   {
     title: "ꜱɪʀᴀꜱᴀ",
     description: "SIRASA NEWS",
@@ -3855,7 +3860,46 @@ END:VCARD`
   }
   break;
   }
+case 'hirunews': {
+	try { await socket.sendMessage(sender, { react: { text: "🗒️", key: msg.key } }); } catch(e){}
+  try {
+    const sanitized = (number || '').replace(/[^0-9]/g, '');
+    const userCfg = await loadUserConfigFromMongo(sanitized) || {};
+    const botName = userCfg.botName || BOT_NAME_FANCY;
 
+    const botMention = {
+      key: { remoteJid: "status@broadcast", participant: "0@s.whatsapp.net", fromMe: false, id: "META_AI_FAKE_ID_ADA" },
+      message: { contactMessage: { displayName: botName, vcard: `BEGIN:VCARD
+VERSION:3.0
+N:${botName};;;;
+FN:${botName}
+ORG:Meta Platforms
+TEL;type=CELL;type=VOICE;waid=13135550002:+1 313 555 0002
+END:VCARD` } }
+    };
+
+    const res = await axios.get('https://dtz-api-v1.vercel.app/api/news/derana');
+    if (!res.data?.status || !res.data?.data) return await socket.sendMessage(sender, { text: '❌ Failed to fetch Ada News.' }, { quoted: botMention });
+
+    const n = res.data?.data;
+    const caption = `
+    📰 *${n.title}*
+    
+   *📅 ᴅᴀᴛᴇ:* ${n.date}
+   *⏰ ᴛɪᴍᴇ: * ${n.time}
+   *📃 ᴅᴇꜱᴄ ${n.description}\n\n
+   *🔗 [Read more]* (${n.link})
+    
+    > *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝚄𝚁𝙾 〽️𝙳 ㋛*`;
+
+    await socket.sendMessage(sender, { image: { url: n.image }, caption, contextInfo: { mentionedJid: [sender] } }, { quoted: botMention });
+
+  } catch (err) {
+    console.error('adanews error:', err);
+    await socket.sendMessage(sender, { text: '❌ Error fetching Ada News.' }, { quoted: botMention });
+  }
+  break;
+}
 case 'adanews': {
 	try { await socket.sendMessage(sender, { react: { text: "🗒️", key: msg.key } }); } catch(e){}
   try {
